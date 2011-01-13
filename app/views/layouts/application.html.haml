@@ -2,10 +2,7 @@
 %head
  %title PlatForms2011
  = stylesheet_link_tag :all
- = stylesheet_link_tag 'screen.css', :media => 'screen, projection'
- /[if IE]
-  = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
- 
+ = stylesheet_link_tag 'application.css'
  = javascript_include_tag :defaults
  = csrf_meta_tag
  = yield(:head)
