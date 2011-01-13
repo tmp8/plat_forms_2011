@@ -15,7 +15,6 @@ class ActiveSupport::TestCase
   
   include ::FixtureBackground::ActiveSupport::TestCase
   include RR::Adapters::TestUnit
-  include Devise::TestHelpers
 
   # Add more helper methods to be used by all tests here...
 end
