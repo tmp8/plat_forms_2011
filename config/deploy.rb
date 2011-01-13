@@ -1,11 +1,11 @@
 $:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
 require "rvm/capistrano"                  # Load RVM's capistrano plugin.
-set :rvm_ruby_string, '1.9.2@server_test'        # Or whatever env you want it to run in.
+set :rvm_ruby_string, '1.9.2@plat_forms_2011'        # Or whatever env you want it to run in.
 
 ssh_options[:forward_agent] = true
 
-set :user, '<insert username here>'
-set :domain, '<insert domain here>'
+set :user, 'tmp8'
+set :domain, '192.168.0.150'
 set :application, 'plat_forms_2011'
 
 # file paths
@@ -50,4 +50,3 @@ end
 task :symlink_config do
   run "ln -s #{shared_path}/config/database.yml #{release_path}/config/database.yml"
 end
- 
