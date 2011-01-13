@@ -8,7 +8,7 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module PlatForms2011
   class Application < Rails::Application
-  
+      
     config.action_view.javascript_expansions[:defaults] = %w(jquery.min rails)
 
     # Settings in config/environments/* take precedence over those specified here.
@@ -32,8 +32,6 @@ module PlatForms2011
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-
-        config.action_view.javascript_expansions[:defaults] = %w()
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
