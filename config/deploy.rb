@@ -5,7 +5,7 @@ set :rvm_ruby_string, '1.9.2@plat_forms_2011'        # Or whatever env you want 
 ssh_options[:forward_agent] = true
 
 set :user, 'tmp8'
-set :domain, '192.168.0.150'
+set :domain, 'p'
 set :application, 'plat_forms_2011'
 
 # file paths
