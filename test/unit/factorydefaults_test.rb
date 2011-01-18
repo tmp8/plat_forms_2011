@@ -24,14 +24,19 @@ class FactorydefaultsTest < ActiveSupport::TestCase
     </Response></kml>
     EOS
     stub_request(:get, /.*maps.google.com.*/).to_return(:status => 200, :body => geocode_xml)
+    
+    factorydefaults = Factorydefaults.new
+    factorydefaults.load
+    
+    @it_security = Category.find_by_name('IT Security')
+    @design = Category.find_by_name('Design')
+    @technology = Category.find_by_name('Technology')
+    @mobile_platforms = Category.find_by_name('Mobile Platforms')
   end
 
   test "conference import" do
-    Conference.delete_all
-    Factorydefaults.load
-    conference = Conference.first
+    conference = Conference.find_by_name("26C3 - Here Be Dragons")
     
-    assert_equal "26C3 - Here Be Dragons", conference.name
     assert_equal "The 26th Chaos Communication Congress (26C3) is the annual four-day conference organized by the Chaos Computer Club (CCC). It takes place from December 27th to December 30th 2009 at the bcc Berliner Congress Center in Berlin, Germany.", conference.description
     assert_equal "bcc Berliner Congress Center, Berlin, Germany", conference.location
     assert_equal "52.31N,13.24E", conference.gps
@@ -47,5 +52,18 @@ class FactorydefaultsTest < ActiveSupport::TestCase
     
     assert_equal "Berlin", conference.city
     assert_equal "DE", conference.country
+    
+    assert_equal [@technology, @it_security, @mobile_platforms, @design], conference.categories
+  end
+  
+  test "categories import" do
+    assert_nil @design.parent
+    assert @design.sub_categories.empty?
+    
+    assert_equal @technology, @mobile_platforms.parent
+    assert @mobile_platforms.sub_categories.empty?
+    
+    assert_nil @technology.parent
+    assert_equal [@it_security, @mobile_platforms], @technology.sub_categories
   end
 end

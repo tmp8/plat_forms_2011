@@ -1,2 +1,2 @@
 # origin: RM
-Factorydefaults.load
+Factorydefaults.new.load
