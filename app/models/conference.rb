@@ -1,6 +1,5 @@
 # origin: M
 class Conference < ActiveRecord::Base
-  include GPSResolver
   
   belongs_to :series
   
@@ -22,5 +21,17 @@ class Conference < ActiveRecord::Base
     write_attribute(:city, geo_location[:city])
     write_attribute(:country_code, geo_location[:country_code])
     location
+  end
+
+  def gps=(gps)
+    unless gps.blank?
+      lat, lng = GPS.lat_lng_from_string(gps)
+      write_attribute(:lat, lat)
+      write_attribute(:lng, lng)
+    else
+      write_attribute(:lat, nil)
+      write_attribute(:lng, nil)
+    end
+    write_attribute(:gps, gps)
   end
 end
