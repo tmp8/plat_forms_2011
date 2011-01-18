@@ -37,7 +37,6 @@ class FactorydefaultsTest < ActiveSupport::TestCase
   test "conference import" do
     conference = Conference.find_by_name("26C3 - Here Be Dragons")
     
-    assert_equal "26C3 - Here Be Dragons", conference.name
     assert_equal "The 26th Chaos Communication Congress (26C3) is the annual four-day conference organized by the Chaos Computer Club (CCC). It takes place from December 27th to December 30th 2009 at the bcc Berliner Congress Center in Berlin, Germany.", conference.description
     assert_equal "bcc Berliner Congress Center, Berlin, Germany", conference.location
     assert_equal "52.31N,13.24E", conference.gps
@@ -58,8 +57,6 @@ class FactorydefaultsTest < ActiveSupport::TestCase
   end
   
   test "categories import" do
-    Factorydefaults.load
-    
     assert_nil @design.parent
     assert @design.sub_categories.empty?
     
