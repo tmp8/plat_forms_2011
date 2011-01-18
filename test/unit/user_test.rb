@@ -11,5 +11,4 @@ class UserTest < ActiveSupport::TestCase
     should validate_presence_of(:username)
     should validate_presence_of(:country)
   end
-  
 end

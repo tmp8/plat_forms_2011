@@ -1,4 +1,5 @@
 module GPS
+  
   def lat_lng_from_string(string)
     (/(\d+(\.\d+)?) ?[NnSs] ?,? ?(\d+(\.\d+)?) ?[EeWw]/ =~ string) && [$1, $3]
   end

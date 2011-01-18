@@ -5,26 +5,6 @@ require 'test_helper'
 class FactorydefaultsTest < ActiveSupport::TestCase
 
   setup do
-    geocode_xml = <<-EOS
-    <?xml version="1.0" encoding="UTF-8" ?> 
-    <kml xmlns="http://earth.google.com/kml/2.0"><Response> 
-      <name>bcc Berliner Congress Center, Berlin, Germany</name> 
-      <Status> 
-        <code>200</code> 
-        <request>geocode</request> 
-      </Status> 
-      <Placemark id="p1"> 
-        <address>bcc Berliner Congress Center GmbH, Alexanderstraße 11, 10178 Berlin, Bundesrepublik Deutschland</address> 
-        <AddressDetails Accuracy="9" xmlns="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"><Country><CountryNameCode>DE</CountryNameCode><CountryName>Bundesrepublik Deutschland</CountryName><Locality><LocalityName>Berlin</LocalityName><Thoroughfare><ThoroughfareName>bcc Berliner Congress Center GmbH, Alexanderstraße 11</ThoroughfareName></Thoroughfare><PostalCode><PostalCodeNumber>10178</PostalCodeNumber></PostalCode><AddressLine>bcc Berliner Congress Center GmbH</AddressLine></Locality></Country></AddressDetails> 
-        <ExtendedData> 
-          <LatLonBox north="52.5272199" south="52.5136411" east="13.4323414" west="13.4003266" /> 
-        </ExtendedData> 
-        <Point><coordinates>13.4163340,52.5204310,0</coordinates></Point> 
-      </Placemark> 
-    </Response></kml>
-    EOS
-    stub_request(:get, /.*maps.google.com.*/).to_return(:status => 200, :body => geocode_xml)
-    
     factorydefaults = Factorydefaults.new
     factorydefaults.load
     
@@ -65,5 +45,21 @@ class FactorydefaultsTest < ActiveSupport::TestCase
     
     assert_nil @technology.parent
     assert_equal [@it_security, @mobile_platforms], @technology.sub_categories
+  end
+  
+  test "users import" do
+    user = User.find_by_username('sballmer')
+    
+    assert_not_nil user.encrypted_password
+    assert_equal 'Steve Ballmer', user.full_name
+    assert_equal 'steve.ballmer@example.com', user.email
+    assert_equal 'Redmond', user.city
+    assert_equal 'United States', user.country
+    assert_equal '47.40N,122.7W', user.gps
+
+    assert_equal BigDecimal.new("47.4"), user.lat
+    assert_equal BigDecimal.new("122.7"), user.lng
+    
+    assert_equal "DE", user.country_code # is DE because of Webmock stub
   end
 end
