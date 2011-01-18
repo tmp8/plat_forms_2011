@@ -1,16 +1,19 @@
-%h1 Hello
+%h1
+  Hello
+  = (current_user && current_user.full_name) || 'Dude'
+%p Look for a conference, attend and make friends.
 #hello
 
   #categories
     %h2 Conference categories
-    %ul
+    %ul.list
       - for category in @categories
         = render :partial => 'categories/category_node', :locals => {:category => category}
         
   #running
     %h2 Running conferences
     - if @running_conferences.empty?
-      %p There are no conferences running at the moment.
+      %p.warn There are no conferences running at the moment.
     %ul
       - for conference in @running_conferences
         %li= conference_link(conference)
@@ -18,11 +21,11 @@
   #starting_tomorrow
     %h2 Tomorrows starting conferences
     - if @tomorrows_conferences.empty?
-      %p There are no conferences starting tomorrow.
+      %p.warn There are no conferences starting tomorrow.
     %ul
       - for conference in @tomorrows_conferences
         %li= conference_link(conference)
-        
+  
   #conferences
     %h2 All conferences
     %ul

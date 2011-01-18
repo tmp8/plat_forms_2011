@@ -22,10 +22,4 @@ module ApplicationHelper
       )
     end
   end
-  
-  # def navigation
-  #   content_tag("ul", 
-  #     content_tag('li', link_to_unless_current("Create Conference"))
-  #   )
-  # end
 end

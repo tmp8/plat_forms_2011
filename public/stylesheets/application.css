@@ -1,0 +1,104 @@
+/* line 1, ../../app/stylesheets/application.scss */
+h1 {
+  margin: 0.3em 0 1em 0;
+  font-family: times, Times New Roman, times-roman, georgia, serif;
+  color: #444;
+  margin: 0;
+  padding: 0px 0px 6px 0px;
+  font-size: 51px;
+  line-height: 44px;
+  letter-spacing: -2px;
+  font-weight: bold;
+}
+
+/* line 14, ../../app/stylesheets/application.scss */
+h2 {
+  margin: 0.3em 0 0.7em 0;
+  font-family: Gill Sans, Verdana;
+  font-size: 11px;
+  line-height: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+/* line 25, ../../app/stylesheets/application.scss */
+p {
+  margin-bottom: 2em;
+}
+
+/* line 29, ../../app/stylesheets/application.scss */
+ul.list {
+  margin-bottom: 2em;
+}
+/* line 32, ../../app/stylesheets/application.scss */
+ul.list li {
+  margin-left: 1em;
+}
+
+/* line 37, ../../app/stylesheets/application.scss */
+ul.navigation li {
+  margin: 0.3em;
+  display: inline;
+  vertical-align: top;
+}
+
+/* line 43, ../../app/stylesheets/application.scss */
+.warn {
+  color: #c8782a;
+}
+
+/* line 47, ../../app/stylesheets/application.scss */
+.message {
+  padding: 0 1em;
+  text-align: center;
+  border-bottom: 1px solid #000;
+}
+
+/* line 53, ../../app/stylesheets/application.scss */
+.notice {
+  background-color: #9eee54;
+  color: green;
+}
+
+/* line 58, ../../app/stylesheets/application.scss */
+.alert {
+  background-color: #ee5b54;
+  color: #000;
+}
+
+/* divs */
+/* line 65, ../../app/stylesheets/application.scss */
+#navigation {
+  margin: 1em;
+}
+
+/* line 69, ../../app/stylesheets/application.scss */
+#content {
+  margin: 2em;
+}
+
+/* Some default Styles for Simple-Form */
+/* line 75, ../../app/stylesheets/application.scss */
+.simple_form label {
+  float: left;
+  width: 100px;
+  text-align: right;
+  margin: 2px 10px;
+}
+
+/* line 82, ../../app/stylesheets/application.scss */
+.simple_form div.input {
+  margin-bottom: 10px;
+}
+
+/* line 86, ../../app/stylesheets/application.scss */
+.simple_form div.boolean, .simple_form input[type='submit'] {
+  margin-left: 120px;
+}
+
+/* line 90, ../../app/stylesheets/application.scss */
+.simple_form div.boolean label {
+  float: none;
+  margin: 0;
+}
