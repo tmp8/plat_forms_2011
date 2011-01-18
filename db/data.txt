@@ -1,4 +1,4 @@
-[{
+[[{
     "username" : "bgates",
     "password" : "kzr",
     "fullname" : "Bill Gates",
@@ -138,7 +138,7 @@
     "password" : "ua4EeJ0oh",
     "fullname" : "Alexander Kruger",
     "email" : "AlexanderKruger@example.com ",
-    "town" : "Großenhain",
+    "town" : "GroÃŸenhain",
     "country" : "Deutschland",
     "gps" : "51.292923N,13.530453E"
 },
@@ -165,7 +165,7 @@
     "password" : "bei1fa6uaGi",
     "fullname" : "Birgit Mehler",
     "email" : "BirgitMehler@example.com",
-    "town" : "Düsseldorf",
+    "town" : "DÃ¼sseldorf",
     "country" : "Deutschland",
     "gps" : "51.218397N,6.816742E"
 },
@@ -242,10 +242,10 @@
     "gps" : "50.0N,7E"
 },
 {
-    "username" : "GSchröder",
+    "username" : "GSchrÃ¶der",
     "password" : "kzr",
-    "fullname" : "Gerhard Schröder",
-    "email" : "GSchröder@email.example.com",
+    "fullname" : "Gerhard SchrÃ¶der",
+    "email" : "GSchrÃ¶der@email.example.com",
     "town" : "Berlin",
     "country" : "Germany",
     "gps" : "52.0N,13E"
@@ -260,10 +260,10 @@
     "gps" : "52.0N,13E"
 },
 {
-    "username" : "MMüller",
+    "username" : "MMÃ¼ller",
     "password" : "123",
-    "fullname" : "Michael Müller",
-    "email" : "MMüller@email.example.com",
+    "fullname" : "Michael MÃ¼ller",
+    "email" : "MMÃ¼ller@email.example.com",
     "town" : "Berlin",
     "country" : "Germany",
     "gps" : "52.0N,13E"
@@ -369,7 +369,7 @@
 {
     "name" : "Oncology Biomarkers Conference",
     "contacts" : [{
-        "username" : "MMüller"
+        "username" : "MMÃ¼ller"
     }]
 }],[{
     "name" : "26C3 - Here Be Dragons",
@@ -493,8 +493,8 @@
     {
         "name" : "Mobile Platforms"
     }],
-    "description" : "The droidcon conference deals with „Android“, the platform for mobile devices which is being developed by the Open Handset Alliance under the guidance of Google. droidcon is developer- driven and independent from interests of hardware and software vendors.",
-    "location" : "Takustraße 39, 14195 Berlin, Germany",
+    "description" : "The droidcon conference deals with â€žAndroidâ€œ, the platform for mobile devices which is being developed by the Open Handset Alliance under the guidance of Google. droidcon is developer- driven and independent from interests of hardware and software vendors.",
+    "location" : "TakustraÃŸe 39, 14195 Berlin, Germany",
     "gps" : "52.45N,13.29E",
     "venue" : "Konferenzcenter Seminaris",
     "accomodation" : "",
@@ -583,7 +583,7 @@
     {
         "name" : "Technology"
     }],
-    "description" : "With more than 35 sessions and 30+ expert speakers, the HOW Design Conference (June 24-27) offers everything you need to boost your design career and create outstanding work.\n\nYou’ll learn how to use your software more effectively, develop a better creative process, find inspiration whenever you need it and more. Plus, you’ll be surrounded by thousands of creatives—the perfect environment for networking, learning and soaking up all the creative energy.",
+    "description" : "With more than 35 sessions and 30+ expert speakers, the HOW Design Conference (June 24-27) offers everything you need to boost your design career and create outstanding work.\n\nYouâ€™ll learn how to use your software more effectively, develop a better creative process, find inspiration whenever you need it and more. Plus, youâ€™ll be surrounded by thousands of creativesâ€”the perfect environment for networking, learning and soaking up all the creative energy.",
     "location" : "151 E. Wacker Drive, Chicago, IL 60601, United States",
     "gps" : "41.88N,87.62W",
     "venue" : "Hyatt Regency Chicago",
@@ -607,7 +607,7 @@
     {
         "name" : "Entertainment"
     }],
-    "description" : "Expo 2010, officially Expo 2010 Shanghai China (simplified Chinese: ??2010????????; pinyin: Zhongguó Èrlíngyilíng Nián Shànghai Shìjìe Bólanhuì) is held on both banks of the Huangpu River in the city of Shanghai, China, from May 1 to October 31, 2010. The theme of the exposition is \"Better City – Better Life\" and signifies Shanghai's new status in the 21st century as the \"next great world city\".",
+    "description" : "Expo 2010, officially Expo 2010 Shanghai China (simplified Chinese: ??2010????????; pinyin: ZhongguÃ³ ÃˆrlÃ­ngyilÃ­ng NiÃ¡n ShÃ nghai ShÃ¬jÃ¬e BÃ³lanhuÃ¬) is held on both banks of the Huangpu River in the city of Shanghai, China, from May 1 to October 31, 2010. The theme of the exposition is \"Better City â€“ Better Life\" and signifies Shanghai's new status in the 21st century as the \"next great world city\".",
     "location" : "Huangpu River, Shanghai, China",
     "gps" : "31.11N,12129E",
     "venue" : "",
@@ -724,7 +724,7 @@
     "howtofind" : ""
 },
 {
-    "name" : "TEI’11",
+    "name" : "TEIâ€™11",
     "creator" : {
         "username" : "BenjaminSanger"
     },
@@ -733,7 +733,7 @@
     "categories" : [{
         "name" : "Sciences"
     }],
-    "description" : "TEI’11 is the fifth international conference dedicated to presenting the latest results in tangible, embedded, and embodied interaction.",
+    "description" : "TEIâ€™11 is the fifth international conference dedicated to presenting the latest results in tangible, embedded, and embodied interaction.",
     "location" : "Funchal, Portugal",
     "gps" : "32.654051N,16.921143W",
     "venue" : "CS Madeira Atlantic Resort & Sea Spa ",
@@ -794,7 +794,7 @@
 {
     "name" : "2011 3rd Oncology Biomarkers Conference",
     "creator" : {
-        "username" : "MMüller"
+        "username" : "MMÃ¼ller"
     },
     "series" : {
         "name" : "Oncology Biomarkers Conference"
@@ -812,12 +812,12 @@
     "gps" : "32N,117W",
     "venue" : "Paradise Point Resort & Spa\n1404 Vacation Road\nSan Diego, CA 92106",
     "accomodation" : "",
-    "howtofind" : "",
+    "howtofind" : ""
 },
 {
     "name" : "2012 4rd Oncology Biomarkers Conference",
     "creator" : {
-        "username" : "MMüller"
+        "username" : "MMÃ¼ller"
     },
     "series" : {
         "name" : "Oncology Biomarkers Conference"
@@ -835,12 +835,12 @@
     "gps" : "32N,117W",
     "venue" : "Paradise Point Resort & Spa\n1404 Vacation Road\nSan Diego, CA 92106",
     "accomodation" : "",
-    "howtofind" : "",
+    "howtofind" : ""
 },
 {
     "name" : "ESF-EMBO Research Conference \"Synthetic Biology of Antibiotic Production\"",
     "creator" : {
-        "username" : "MMüller"
+        "username" : "MMÃ¼ller"
     },
     "startdate" : "20111002",
     "enddate" : "20111007",
@@ -855,12 +855,12 @@
     "gps" : "41N,3E",
     "venue" : "Hotel Eden Roc, Sant Feliu de Guixols, Spain",
     "accomodation" : "",
-    "howtofind" : "",
+    "howtofind" : ""
 },
 {
     "name" : "Synthetic Biology 5.0: The Fifth International Meeting on Synthetic Biology",
     "creator" : {
-        "username" : "MMüller"
+        "username" : "MMÃ¼ller"
     },
     "startdate" : "20110615",
     "enddate" : "20110617",
@@ -875,12 +875,12 @@
     "gps" : "37N,122W",
     "venue" : "Stanford University, Stanford, California USA",
     "accomodation" : "",
-    "howtofind" : "",
+    "howtofind" : ""
 },
 {
     "name" : "ACCT11- International Conference on Advanced Computing and Communication Technologies",
     "creator" : {
-        "username" : "MMüller"
+        "username" : "MMÃ¼ller"
     },
     "startdate" : "20110121",
     "enddate" : "20110123",
@@ -892,12 +892,12 @@
     "gps" : "xxx",
     "venue" : "Gymkhana Club, HUDA Sector 4, Rohtak",
     "accomodation" : "",
-    "howtofind" : "",
+    "howtofind" : ""
 },
 {
     "name" : "2011 3rd IEEE International Conference on Computer and Automation (ICCAE 2011)",
     "creator" : {
-        "username" : "MMüller"
+        "username" : "MMÃ¼ller"
     },
     "startdate" : "20110121",
     "enddate" : "20110123",
@@ -909,12 +909,12 @@
     "gps" : "29N,106E",
     "venue" : "Carlton Hotel, Chongqing, China",
     "accomodation" : "",
-    "howtofind" : "",
+    "howtofind" : ""
 },
 {
     "name" : "2011 3rd IEEE International Conference on Machine Learning and Computing (ICMLC 2011)",
     "creator" : {
-        "username" : "MMüller"
+        "username" : "MMÃ¼ller"
     },
     "startdate" : "20110226",
     "enddate" : "20110228",
@@ -926,12 +926,12 @@
     "gps" : "xxx",
     "venue" : "Location to be decided",
     "accomodation" : "",
-    "howtofind" : "",
+    "howtofind" : ""
 },
 {
     "name" : "ICCFMS 2011 : International Conference on Communication, Film and Media Sciences",
     "creator" : {
-        "username" : "MMüller"
+        "username" : "MMÃ¼ller"
     },
     "startdate" : "20110628",
     "enddate" : "20110630",
@@ -943,12 +943,12 @@
     "gps" : "48N,2E",
     "venue" : "Holiday Inn Paris\nMontparnasse-Av.Du Maine\n79-81 Avenue Du Maine\nParis, 75014 France\nPhone: +33-1-43201393\nFax: +33-1-43209560\nwww.holidayinn.com/parisgare",
     "accomodation" : "",
-    "howtofind" : "",
+    "howtofind" : ""
 },
 {
     "name" : "Media for Science Forum 2011",
     "creator" : {
-        "username" : "MMüller"
+        "username" : "MMÃ¼ller"
     },
     "startdate" : "20110512",
     "enddate" : "20110513",
@@ -960,12 +960,12 @@
     "gps" : "40N,3W",
     "venue" : "La Casa Encendida in Madrid",
     "accomodation" : "",
-    "howtofind" : "",
+    "howtofind" : ""
 },
 {
     "name" : "Media Art History 2011 - Rewire",
     "creator" : {
-        "username" : "MMüller"
+        "username" : "MMÃ¼ller"
     },
     "startdate" : "20110928",
     "enddate" : "20111001",
@@ -977,5 +977,5 @@
     "gps" : "53N,3W",
     "venue" : "Location to be decided.",
     "accomodation" : "",
-    "howtofind" : "",
-}]
+    "howtofind" : ""
+}]]
