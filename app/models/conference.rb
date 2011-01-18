@@ -20,9 +20,10 @@ class Conference < ActiveRecord::Base
   validates_presence_of :location
   
   searchable do 
-    text :text
+    text :name
     text :description     
     integer :category, :multiple => true, :using => :category_ids
+    
     date :startdate
     
     # date :enddate
@@ -33,26 +34,24 @@ class Conference < ActiveRecord::Base
     end
   end
 
-  def text
-    "#{name} #{description}"
-  end
-  
   def category_ids
     categories.map(&:id)
   end
 
   class << self
     def query(term = nil, startdate = nil, enddate = nil, categories = nil)
-      Conference.search do
+      q = Conference.search do
         keywords(term) if term
 
         with(:category).any_of(categories.map(&:id)) if categories
+        # with(:startdate).greater_than(startdate - 1) if startdate
 
         # with(:coordinates).near(BigDecimal.new('40.7'), BigDecimal.new('-73.5'))
-        # with(:startdate).greater_than(startdate - 1) if startdate
         # with(:enddate).less_equal(enddate) if enddate
         # with(:coordinates).near(a.lat.to_f, a.lng.to_f, :precision => 10) 
-      end.results
+      end
+      # p q
+      q.results
     end
   end
 

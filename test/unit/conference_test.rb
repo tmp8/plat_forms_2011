@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class ConferenceTest < ActiveSupport::TestCase
+  setup do 
+    Conference.delete_all
+  end
+  
   context "search" do
     
     should "find by name" do
@@ -43,11 +47,11 @@ class ConferenceTest < ActiveSupport::TestCase
     context "by date" do
       # MUST
       # should "find when startdate is given" do
-      #   zero = Factory(:conference, :startdate => Date.new(2009,5,22), :enddate => Date.new(2009,5,22))
-      #   one = Factory(:conference, :startdate => Date.new(2010,5,22), :enddate => Date.new(2010,5,22))
-      #   two = Factory(:conference, :startdate => Date.new(2011,5,22), :enddate => Date.new(2011,5,22))
+      #   zero = Factory(:conference, :startdate => Date.new(2009,5,22), :enddate => Date.new(2009,5,23))
+      #   one = Factory(:conference, :startdate => Date.new(2010,5,22), :enddate => Date.new(2010,5,23))
+      #   two = Factory(:conference, :startdate => Date.new(2011,5,22), :enddate => Date.new(2011,5,23))
       #   Conference.index
-      #   assert_equal [one, two], Conference.query(nil, Date.new(2010,5,22))
+      #   assert_equal [one, two], Conference.query(nil, Date.new(2010,5,21))
       # end
     end
     
