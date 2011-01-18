@@ -14,4 +14,18 @@ module ApplicationHelper
       "#{user.username}"
     end
   end
+
+  def navigation
+    if current_user
+      content_tag("ul", 
+        content_tag('li', link_to_unless_current("Conferences", conferences_path))
+      )
+    end
+  end
+  
+  # def navigation
+  #   content_tag("ul", 
+  #     content_tag('li', link_to_unless_current("Create Conference"))
+  #   )
+  # end
 end

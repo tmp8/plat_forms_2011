@@ -6,7 +6,14 @@ class Conference < ActiveRecord::Base
   has_many :participants, :through => :conference_participations, :source => :user
   has_many :conference_categories, :dependent => :destroy
   has_many :categories, :through => :conference_categories
-  
+
+  validates_presence_of :name
+  validates_presence_of :startdate
+  validates_presence_of :enddate
+# FIXME  validates_presence_of :categories
+  validates_presence_of :description
+  validates_presence_of :location
+
   def location=(location)
     write_attribute(:location, location)
     geo_location = GPS.geocode(location)
