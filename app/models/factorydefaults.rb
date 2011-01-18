@@ -1,9 +1,17 @@
 class Factorydefaults
-  class << self
-    def load
-      users, categories, conference_series, conferences = load_json_data
-
-      categories.each do |category_data|
+  
+  def initialize
+    @users, @categories, @conference_series, @conferences = load_json_data
+  end
+  
+  def load
+    create_categories
+    create_conferences
+  end
+  
+  private
+    def create_categories
+      @categories.each do |category_data|
         category = Category.find_or_initialize_by_name(category_data['name'])
         unless (parent_category_data = category_data['parent']).empty?
           category.parent = Category.find_or_create_by_name(parent_category_data['name'])
@@ -16,8 +24,10 @@ class Factorydefaults
           sub_category.save!
         end
       end
-
-      conferences.each do |conference_data|
+    end
+    
+    def create_conferences
+      @conferences.each do |conference_data|
         lat, lng = GPS.lat_lng_from_string(conference_data['gps'])
         geo_location = GPS.geocode(conference_data['location'])
         
@@ -36,12 +46,17 @@ class Factorydefaults
           city: geo_location[:city],
           country: geo_location[:country_code]
         )
+        
+        conference_data['categories'].each do |category_data|
+          ConferenceCategory.create!(
+            conference: conference,
+            category: Category.find_by_name(category_data['name'])
+          )
+        end
       end
     end
     
-    private
-      def load_json_data
-        JSON.parse(IO.read(File.dirname(__FILE__) + '/../../db/data.txt'))
-      end
-  end
+    def load_json_data
+      JSON.parse(IO.read(File.dirname(__FILE__) + '/../../db/data.txt'))
+    end
 end
