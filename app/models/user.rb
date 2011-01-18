@@ -72,6 +72,10 @@ class User < ActiveRecord::Base
     write_attribute(:country, country)
   end
   
+  def participation_for(conference)
+    conference_participations.detect { |cp| cp.conference == conference }
+  end
+  
   protected
 
   def self.find_for_database_authentication(conditions)

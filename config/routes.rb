@@ -1,6 +1,10 @@
 PlatForms2011::Application.routes.draw do
   devise_for :users
   
+  resources :conferences do
+    resources :conference_participations
+  end
+  
   root :to => "welcome#hello"
   
   scope "ws", :as => "ws", :defaults => { :format => 'json' } do
