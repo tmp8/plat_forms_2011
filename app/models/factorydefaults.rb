@@ -11,6 +11,7 @@ class Factorydefaults
     create_conferences
     create_users
     create_series
+    create_admin_user
   end
   
   def reset
@@ -85,6 +86,7 @@ class Factorydefaults
         user = User.new(
           username: user_data['username'],
           password: user_data['password'],
+          password_confirmation: user_data['password'],
           full_name: user_data['fullname'],
           email: user_data['email'],
           city: user_data['town'],
