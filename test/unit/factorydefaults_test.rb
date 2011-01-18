@@ -51,7 +51,7 @@ class FactorydefaultsTest < ActiveSupport::TestCase
     assert_equal BigDecimal.new("13.24"), conference.lng
     
     assert_equal "Berlin", conference.city
-    assert_equal "DE", conference.country
+    assert_equal "DE", conference.country_code
     
     assert_equal [@technology, @it_security, @mobile_platforms, @design], conference.categories
   end
