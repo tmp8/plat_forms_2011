@@ -1,4 +1,5 @@
 # origin: M
+
 require 'test_helper'
 
 class FriendshipTest < ActiveSupport::TestCase
