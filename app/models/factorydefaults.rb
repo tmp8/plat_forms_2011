@@ -52,7 +52,7 @@ class Factorydefaults
     
     def create_users
       @users.each do |user_data|
-        user = User.create!(
+        user = User.new(
           username: user_data['username'],
           password: user_data['password'],
           full_name: user_data['fullname'],
@@ -61,6 +61,8 @@ class Factorydefaults
           country: user_data['country'],
           gps: user_data['gps']
         )
+        user.skip_confirmation!
+        user.save!
       end
     end
     
