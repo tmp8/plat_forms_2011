@@ -6,7 +6,7 @@
     %legend Fill in your details
     = f.input :email
     = f.input :full_name
-    = f.input :country, :priority => %w(Germany)
+    = country_code_select(:user, :country, [[  'Germany', 'DE']])
   %fieldset
     %legend Choose Login and Password
     = f.input :username
