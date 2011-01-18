@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   
   has_many :conference_participations
   has_many :conferences, :through => :conference_participations
+  
+  has_many :organizing_conferences
 
   def request_friendship(friend)
     self.friendships.create(:friend => friend)

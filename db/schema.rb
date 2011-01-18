@@ -10,7 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110118100519) do
+ActiveRecord::Schema.define(:version => 20110118125425) do
+
+  create_table "conference_participations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "conference_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "conference_participations", ["conference_id"], :name => "index_conference_participations_on_conference_id"
+  add_index "conference_participations", ["user_id", "conference_id"], :name => "index_conference_participations_on_user_id_and_conference_id", :unique => true
+  add_index "conference_participations", ["user_id"], :name => "index_conference_participations_on_user_id"
 
   create_table "conferences", :force => true do |t|
     t.string   "version"
@@ -19,8 +30,8 @@ ActiveRecord::Schema.define(:version => 20110118100519) do
     t.string   "city"
     t.string   "location"
     t.string   "gps"
-    t.decimal  "lat",          :precision => 12, :scale => 8
-    t.decimal  "lng",          :precision => 12, :scale => 8
+    t.decimal  "lat",            :precision => 12, :scale => 8
+    t.decimal  "lng",            :precision => 12, :scale => 8
     t.integer  "creator_id"
     t.integer  "series_id"
     t.date     "startdate"
@@ -31,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20110118100519) do
     t.text     "howtofind"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "organizator_id"
   end
 
   create_table "friendships", :force => true do |t|
