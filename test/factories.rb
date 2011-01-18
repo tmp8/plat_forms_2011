@@ -31,3 +31,8 @@ Factory.define :conference_participation do |f|
   f.association :conference
   f.association :user
 end
+
+
+Factory.define :category do |f|
+  f.name  { Faker::Name.name }
+end
