@@ -23,8 +23,8 @@ class Conference < ActiveRecord::Base
   
   default_scope :order => 'startdate ASC'
   
-  named_scope :running, :conditions => ['startdate >= CURDATE() AND enddate <= CURDATE()']
-  named_scope :tomorrow, :conditions => ['startdate = CURDATE() + 1']
+  scope :running, :conditions => ['startdate >= CURDATE() AND enddate <= CURDATE()']
+  scope :tomorrow, :conditions => ['startdate = CURDATE() + 1']
   
   searchable do 
     text :name

@@ -5,3 +5,5 @@ config/database.yml
 db/*.sqlite3
 test/backgrounds/**/*
 db/schema.rb
+log/*.lck
+solr/**/*
