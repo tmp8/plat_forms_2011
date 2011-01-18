@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
     attending.destroy if attending
   end
   
-  def attends?(conference)
-    conferences.include?(conference)
+  def participation_for(conference)
+    conference_participations.detect { |cp| cp.conference == conference }
   end
 end
