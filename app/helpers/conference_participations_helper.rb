@@ -1,0 +1,2 @@
+module ConferenceParticipationsHelper
+end

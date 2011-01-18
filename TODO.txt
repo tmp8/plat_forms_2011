@@ -1,0 +1,2 @@
+* check all attr_accessible
+* check for race-conditions and missing unique keys
