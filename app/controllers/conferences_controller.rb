@@ -1,16 +1,30 @@
 class ConferencesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :throw_not_implemented_for_json, :only => [:index, :show, :update, :destroy]
-
+  before_filter :throw_not_implemented_for_json, :only => [:index, :destroy]
+  
   def create
-    @conference = current_user.organizing_conferences.new(params[:conference])
     respond_to do |format|
-      if @conference.save
-        format.html { redirect_to(conferences_path, :notice => 'Conference was successfully created.') }
-        format.json { render :json => @conference.to_json }
-      else
-        format.html { render :action => "new" }
-        format.json { render :status => 400, :text => "Cannot save!"  }
+      
+      format.json do
+        begin
+          @conference = current_user.organizing_conferences.build_from_json(request.raw_post, current_user)
+          if @conference.save
+            render :json => @conference.to_json 
+          else
+            render :status => 400, :json => "Cannot save!"
+          end
+        rescue ActiveRecord::UnknownAttributeError
+          render :status => 400, :json => "Cannot save!"
+        end
+      end
+      
+      format.html do
+        @conference = current_user.organizing_conferences.build(params[:conference])
+        if @conference.save
+          redirect_to(conferences_path, :notice => 'Conference was successfully created.')
+        else
+          render :action => "new" 
+        end
       end
     end
   end
@@ -26,13 +40,18 @@ class ConferencesController < ApplicationController
     @conference = Conference.find(params[:id])
     respond_to do |format|
       format.html { }
+      format.json { render :json => @conference.to_json }
     end
   end
   
   def update
     @conference = current_user.organizing_conferences.find(params[:id]) 
-    respond_to do |format|
-      format.html { }
+    @conference.attributes = params[:conference] || JSON.parse(CGI.unescape(request.raw_post))
+    if @conference.save
+      respond_to do |format|
+        format.html { }
+        format.json { render :json => @conference.to_json }
+      end
     end
   end
   
@@ -44,7 +63,7 @@ class ConferencesController < ApplicationController
     @conference = current_user.organizing_conferences.find(params[:id])
   end
   
-  private 
+  protected 
     def throw_not_implemented_for_json
       if params[:format] == 'json'
         render :status => 501, :text => "Not Implemented" and return false

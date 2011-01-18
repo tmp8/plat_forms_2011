@@ -71,4 +71,11 @@ class ActiveSupport::TestCase
    def encode_credentials(username, password)
      "Basic #{ActiveSupport::Base64.encode64("#{username}:#{password}")}"
    end
+   
+   def raw_post(action, params, body)
+      @request.env['RAW_POST_DATA'] = body
+      response = post(action, params)
+      @request.env.delete('RAW_POST_DATA')
+      response
+    end
 end
