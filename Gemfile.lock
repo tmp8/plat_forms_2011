@@ -65,6 +65,7 @@ GEM
     ffi (0.6.3)
       rake (>= 0.8.7)
     fixture_background (0.9.1)
+    geokit (1.5.0)
     haml (3.0.25)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
@@ -155,6 +156,7 @@ DEPENDENCIES
   factory_girl
   faker (= 0.3.1)
   fixture_background (= 0.9.1)
+  geokit
   haml
   haml-rails
   hoptoad_notifier (~> 2.3)
