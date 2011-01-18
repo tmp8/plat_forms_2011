@@ -38,10 +38,16 @@ class FriendshipTest < ActiveSupport::TestCase
   end
   
   should "not create new outstandig requests if exists or blocked"
+  should "allow ending a friendship"
+  should "allow cancelling a friendship request"
 
-  should "block request if blocked!" do
-    # @user.request_friendship(@friend)
-    # @friend.friendship_requests.first.block!
-    # 
+  should "delete request if reject!" do
+    assert_no_difference('Friendship.count') do
+      @user.request_friendship(@friend)
+      @friend.friendship_requests.first.reject!
+    end   
+    
+    assert_equal User::NO_CONTACT, @user.friend_state(@friend)
+    assert_equal User::NO_CONTACT, @friend.friend_state(@user)
   end
 end

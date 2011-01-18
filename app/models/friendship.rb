@@ -1,5 +1,6 @@
 # origin: M
 
+
 class Friendship < ActiveRecord::Base
   OUTSTANDING = 0
   CONFIRMED = 1
@@ -10,8 +11,19 @@ class Friendship < ActiveRecord::Base
   
   scope :outstanding, where("status = #{OUTSTANDING}")
   scope :confirmed, where("status = #{CONFIRMED}")
+
+  def outstanding?
+    status == OUTSTANDING
+  end
+  
+  def reject!
+    return unless outstanding?
+    destroy
+  end
   
   def confirm!
+    return unless outstanding?
+
     transaction do
       friendship_starts_at = Time.now
       self.status = CONFIRMED
