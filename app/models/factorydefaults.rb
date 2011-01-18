@@ -3,11 +3,25 @@ class Factorydefaults
     def load
       users, categories, conference_series, conferences = load_json_data
 
+      categories.each do |category_data|
+        category = Category.find_or_initialize_by_name(category_data['name'])
+        unless (parent_category_data = category_data['parent']).empty?
+          category.parent = Category.find_or_create_by_name(parent_category_data['name'])
+        end
+        category.save!
+        
+        category_data['subcategories'].each do |sub_category_data|
+          sub_category = Category.find_or_create_by_name(sub_category_data['name'])
+          sub_category.parent = category
+          sub_category.save!
+        end
+      end
+
       conferences.each do |conference_data|
         lat, lng = GPS.lat_lng_from_string(conference_data['gps'])
         geo_location = GPS.geocode(conference_data['location'])
         
-        conference = Conference.create!({
+        conference = Conference.create!(
           name: conference_data['name'],
           description: conference_data['description'],
           location: conference_data['location'],
@@ -21,7 +35,7 @@ class Factorydefaults
           lng: lng,
           city: geo_location[:city],
           country: geo_location[:country_code]
-        })
+        )
       end
     end
     

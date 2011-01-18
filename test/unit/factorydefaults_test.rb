@@ -48,4 +48,22 @@ class FactorydefaultsTest < ActiveSupport::TestCase
     assert_equal "Berlin", conference.city
     assert_equal "DE", conference.country
   end
+  
+  test "categories import" do
+    Factorydefaults.load
+    
+    it_security = Category.find_by_name('IT Security')
+    design = Category.find_by_name('Design')
+    technology = Category.find_by_name('Technology')
+    mobile_platforms = Category.find_by_name('Mobile Platforms')
+    
+    assert_nil design.parent
+    assert design.sub_categories.empty?
+    
+    assert_equal technology, mobile_platforms.parent
+    assert mobile_platforms.sub_categories.empty?
+    
+    assert_nil technology.parent
+    assert_equal [it_security, mobile_platforms], technology.sub_categories
+  end
 end
