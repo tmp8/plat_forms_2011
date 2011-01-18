@@ -1,3 +1,4 @@
+# origin: M
 class Factorydefaults
   
   def initialize
@@ -5,13 +6,42 @@ class Factorydefaults
   end
   
   def load
+    empty_tables
     create_categories
     create_conferences
     create_users
     create_series
+    create_admin_user
+  end
+  
+  def reset
+    empty_tables
+    create_admin_user
   end
   
   private
+    def empty_tables
+      ActiveRecord::Base.establish_connection
+      ActiveRecord::Base.connection.tables.each do |table|
+        next if %w(schema_migrations).include?(table)
+           
+        ActiveRecord::Base.connection.execute("TRUNCATE #{table}")
+      end
+    end
+    
+    def create_admin_user
+      user = User.new(
+        username: 'admin',
+        password: 'admin',
+        full_name: 'Admin User',
+        city: 'Hamburg',
+        country: 'Germany',
+        email: 'dev@tmp8.de'
+      )
+      user.skip_confirmation!
+      user.save!
+    end
+    
     def create_categories
       @categories.each do |category_data|
         category = Category.find_or_initialize_by_name(category_data['name'])
@@ -56,6 +86,7 @@ class Factorydefaults
         user = User.new(
           username: user_data['username'],
           password: user_data['password'],
+          password_confirmation: user_data['password'],
           full_name: user_data['fullname'],
           email: user_data['email'],
           city: user_data['town'],

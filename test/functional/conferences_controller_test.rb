@@ -1,13 +1,12 @@
 require 'test_helper'
 
 class ConferencesControllerTest < ActionController::TestCase
-  
   include Devise::TestHelpers
   
   context "ws" do
     
     setup do
-      @user = activated_user
+      @user = create_activated_user
       @conference_attributes = Factory.build(:conference).attributes
       @request.env['HTTP_AUTHORIZATION'] = encode_credentials(@user.username, "123456")
     end
@@ -17,6 +16,5 @@ class ConferencesControllerTest < ActionController::TestCase
       assert_response :success
       assert_equal(@conference_attributes[:name], JSON.parse(response.body)[:name])
     end
-    
   end
 end

@@ -665,7 +665,7 @@
     "categories" : [{
         "name" : "Sciences"
     }],
-    "description" : "",
+    "description" : "[no data in data.txt]",
     "location" : "Vancouver, Canada",
     "gps" : "49.292032N,123.130976W",
     "venue" : "The Westin Bayshore",

@@ -2,15 +2,8 @@ require 'integration_test_helper'
 
 class ConferenceParticipationTest < ActionDispatch::IntegrationTest
 
-  def sign_in(user)
-    visit new_user_session_path
-    fill_in 'Login', :with => @user.email
-    fill_in 'Password', :with => "hasenbraten"
-    click_link_or_button('Sign in')
-  end
-  
   background do 
-    @user = Factory(:user, :password => "hasenbraten", :password_confirmation => "hasenbraten")
+    @user = Factory(:user)
     @user.confirmed_at = Time.now 
     @user.save!
     
