@@ -1,4 +1,5 @@
 # origin: M
+
 class CreateFriendships < ActiveRecord::Migration
   def self.up
     create_table :friendships do |t|

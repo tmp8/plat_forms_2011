@@ -17,9 +17,12 @@ class User < ActiveRecord::Base
   validates_presence_of :country
 
   has_many :friendships
+  has_many :friends, :through => :friendships
+
   has_many :friendship_requests, :class_name => "Friendship", :foreign_key => "friend_id"    
   
-  has_many :friends, :through => :friendships
+  has_many :conference_participations
+  has_many :conferences, :through => :conference_participations
 
   def request_friendship(friend)
     self.friendships.create(:friend => friend)
@@ -35,5 +38,16 @@ class User < ActiveRecord::Base
     else
       NO_CONTACT
     end
+  end
+  
+  def attend!(conference)
+    conference_participations.create!(:conference => conference)
+  rescue ActiveRecord::RecordNotUnique => e
+    conference_participations.find_by_conference_id(conference.id)
+  end
+  
+  def wont_attend!(conference)
+    attending = conference_participations.detect { |cp| cp.conference == conference }
+    attending.destroy if attending
   end
 end

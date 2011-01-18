@@ -27,6 +27,7 @@ class FactorydefaultsTest < ActiveSupport::TestCase
   end
 
   test "conference import" do
+    Conference.delete_all
     Factorydefaults.load
     conference = Conference.first
     

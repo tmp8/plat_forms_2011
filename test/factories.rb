@@ -11,3 +11,12 @@ Factory.define :friendship do |f|
   f.association :user
   f.association :friend
 end
+
+Factory.define :conference do |f|
+  f.name :name
+end
+
+Factory.define :conference_participation do |f|
+  f.association :conference
+  f.association :user
+end
