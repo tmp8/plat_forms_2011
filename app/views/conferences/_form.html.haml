@@ -14,8 +14,9 @@
     = f.input :startdate
     = f.input :enddate
     = f.input :description
-    = f.input :city
     = f.input :location
+
+    = f.input :city
     = f.input :gps
     = f.input :lat
     = f.input :lng
@@ -23,7 +24,7 @@
     = f.input :venue
     = f.input :accomodation
     = f.input :howtofind
-    = f.input :country_code
+    = country_code_select(:conference, :country_code, [['Germany', 'DE']])
 
   .actions
     = f.button :submit

@@ -3,7 +3,7 @@ require 'integration_test_helper'
 class ConferenceParticipationTest < ActionDispatch::IntegrationTest
 
   background do 
-    @user = Factory(:user, :password => "hasenbraten", :password_confirmation => "hasenbraten")
+    @user = Factory(:user)
     @user.confirmed_at = Time.now 
     @user.save!
     

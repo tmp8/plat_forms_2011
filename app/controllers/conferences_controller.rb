@@ -3,10 +3,10 @@ class ConferencesController < ApplicationController
   before_filter :throw_not_implemented_for_json, :only => [:index, :show, :update, :destroy]
 
   def create
-    @conference = current_user.organizing_conference.new(params[:conference])
+    @conference = current_user.organizing_conferences.new(params[:conference])
     respond_to do |format|
       if @conference.save
-        format.html { redirect_to(conferences_path, :notice => 'Conference was successfully created.' }
+        format.html { redirect_to(conferences_path, :notice => 'Conference was successfully created.') }
         format.json { render :json => @conference.to_json }
       else
         format.html { render :action => "new" }
@@ -42,16 +42,6 @@ class ConferencesController < ApplicationController
 
   def edit
     @conference = current_user.organizing_conferences.find(params[:id])
-  end
-
-  def create
-    @conference = Conference.new(params[:conference])
-
-    if @conference.save
-      redirect_to(conferences_path, :notice => 'Conference was successfully created.')
-    else
-      render :action => "new"
-    end
   end
   
   private 
