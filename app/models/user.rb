@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :full_name, :country, 
+                  :city, :username, :gps
                   :city, :username, :gps, :login
                   
   validates_presence_of :username
@@ -30,7 +31,8 @@ class User < ActiveRecord::Base
   has_many :conference_participations
   has_many :conferences, :through => :conference_participations
   
-  has_many :organizing_conferences, :class_name => "Conference"
+  has_many :series_contacts, :foreign_key => :contact_id
+  has_many :series, :through => :series_contacts
 
   def request_friendship(friend)
     self.friendships.create(:friend => friend)

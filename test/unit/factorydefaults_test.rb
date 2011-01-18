@@ -61,5 +61,15 @@ class FactorydefaultsTest < ActiveSupport::TestCase
     assert_equal BigDecimal.new("122.7"), user.lng
     
     assert_equal "DE", user.country_code # is DE because of Webmock stub
+    
+    assert user.series.empty?
+  end
+  
+  test "series import" do
+    series = Series.find_by_name('ICSE')
+    user = User.find_by_username('MichelleLehmann')
+    
+    assert_equal [user], series.contacts
+    assert_equal [series], user.series
   end
 end
