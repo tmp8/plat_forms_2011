@@ -1,3 +1,5 @@
+# origin: GM
+
 class User < ActiveRecord::Base
   NO_CONTACT = 0
   RCD_SENT = 1
