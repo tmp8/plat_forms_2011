@@ -53,8 +53,15 @@ class ActiveSupport::TestCase
   
   protected
   
-  def activated_user
+  def create_activated_user
     user = Factory.build(:user)
+    user.skip_confirmation!
+    user.save!
+    user
+  end
+  
+  def create_admin_user
+    user = Factory.build(:admin)
     user.skip_confirmation!
     user.save!
     user
