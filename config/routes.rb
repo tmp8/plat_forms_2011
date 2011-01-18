@@ -11,7 +11,9 @@ PlatForms2011::Application.routes.draw do
   resources :categories, :only => [:show]
   
   scope "ws", :as => "ws", :defaults => { :format => 'json' } do
-    resources :conferences, :only => [:create, :show, :update, :index, :destroy]
+    resources :conferences, :only => [:create, :show, :update, :index, :destroy] do
+      resources :attendees, :only => [:index, :create, :destroy]
+    end
     resources :users, :path => "members", :only => [:create, :show, :update] do
       resources :contacts, :only => [:create, :index]
     end
