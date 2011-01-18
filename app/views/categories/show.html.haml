@@ -1,0 +1,6 @@
+%h1= @category.name
+
+%h2 Conferences in this category
+%ul
+  - for conference in @category.conferences
+    %li= conference_link(conference)

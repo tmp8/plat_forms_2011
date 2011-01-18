@@ -1,1 +1,31 @@
 %h1 Hello
+#hello
+
+  #categories
+    %h2 Conference categories
+    %ul
+      - for category in @categories
+        = render :partial => 'categories/category_node', :locals => {:category => category}
+        
+  #running
+    %h2 Running conferences
+    - if @running_conferences.empty?
+      %p There are no conferences running at the moment.
+    %ul
+      - for conference in @running_conferences
+        %li= conference_link(conference)
+        
+  #starting_tomorrow
+    %h2 Tomorrows starting conferences
+    - if @tomorrows_conferences.empty?
+      %p There are no conferences starting tomorrow.
+    %ul
+      - for conference in @tomorrows_conferences
+        %li= conference_link(conference)
+        
+  #conferences
+    %h2 All conferences
+    %ul
+      - for conference in @conferences
+        %li= conference_link(conference)
+

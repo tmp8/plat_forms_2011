@@ -1,5 +1,5 @@
 class ConferencesController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :only => [:update, :destroy]
   before_filter :throw_not_implemented_for_json, :only => [:index, :show, :update, :destroy]
 
   def create

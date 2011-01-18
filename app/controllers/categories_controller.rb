@@ -5,7 +5,12 @@ class CategoriesController < ApplicationController
   end
   
   def show
-    render :status => 501, :text => "Not Implemented"
+    @category = Category.find(params[:id])
+    
+    respond_to do |format|
+      format.html { render :action => 'show' }
+      format.json { render :status => 501, :text => "Not Implemented" }
+    end
   end
   
   def create

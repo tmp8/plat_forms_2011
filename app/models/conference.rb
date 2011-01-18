@@ -15,6 +15,11 @@ class Conference < ActiveRecord::Base
 # FIXME  validates_presence_of :categories
   validates_presence_of :description
   validates_presence_of :location
+  
+  default_scope :order => 'startdate ASC'
+  
+  named_scope :running, :conditions => ['startdate >= CURDATE() AND enddate <= CURDATE()']
+  named_scope :tomorrow, :conditions => ['startdate = CURDATE() + 1']
 
   def location=(location)
     write_attribute(:location, location)

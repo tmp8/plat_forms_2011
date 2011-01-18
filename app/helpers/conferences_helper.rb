@@ -10,4 +10,8 @@ module ConferencesHelper
       # FIXME: go through sing-in / up and participate
     end
   end
+  
+  def conference_link(conference)
+    ("#{conference.startdate} to #{conference.enddate} - " + link_to(conference.name, conference_path(conference))).html_safe
+  end
 end

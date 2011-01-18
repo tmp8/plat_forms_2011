@@ -7,6 +7,8 @@ PlatForms2011::Application.routes.draw do
   
   root :to => "welcome#hello"
   
+  resources :categories, :only => [:show]
+  
   scope "ws", :as => "ws", :defaults => { :format => 'json' } do
     resources :conferences, :only => [:create, :show, :update, :index, :destroy]
     resources :users, :path => "members", :only => [:create, :show, :update] do
