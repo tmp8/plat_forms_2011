@@ -1,6 +1,8 @@
 # origin: GM
 
 class User < ActiveRecord::Base
+  include GPSResolver
+
   NO_CONTACT = 0
   RCD_SENT = 1
   RCD_RECEIVED = 2
@@ -15,7 +17,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :full_name, :country, 
-                  :city, :username, :lat, :lng, :login
+                  :city, :username, :gps, :login
                   
   validates_presence_of :username
   validates_presence_of :country
@@ -55,6 +57,19 @@ class User < ActiveRecord::Base
   def wont_attend!(conference)
     attending = conference_participations.detect { |cp| cp.conference == conference }
     attending.destroy if attending
+  end
+  
+  def email=(email)
+    write_attribute(:email, email.strip) unless email.nil?
+  end
+  
+  def country=(country)
+    unless country.blank?
+      write_attribute(:country_code, GPS.geocode(country)[:country_code])
+    else
+      write_attribute(:country_code, nil)
+    end
+    write_attribute(:country, country)
   end
   
   protected

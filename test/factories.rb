@@ -1,3 +1,4 @@
+# encoding: utf-8
 # Insert Factories
 Factory.define :user do |f|
   f.username { Faker::Name.name }

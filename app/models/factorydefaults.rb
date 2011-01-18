@@ -7,6 +7,7 @@ class Factorydefaults
   def load
     create_categories
     create_conferences
+    create_users
   end
   
   private
@@ -28,9 +29,6 @@ class Factorydefaults
     
     def create_conferences
       @conferences.each do |conference_data|
-        lat, lng = GPS.lat_lng_from_string(conference_data['gps'])
-        geo_location = GPS.geocode(conference_data['location'])
-        
         conference = Conference.create!(
           name: conference_data['name'],
           description: conference_data['description'],
@@ -41,10 +39,6 @@ class Factorydefaults
           howtofind: conference_data['howtofind'],
           startdate: conference_data['startdate'],
           enddate: conference_data['enddate'],
-          lat: lat,
-          lng: lng,
-          city: geo_location[:city],
-          country: geo_location[:country_code]
         )
         
         conference_data['categories'].each do |category_data|
@@ -53,6 +47,22 @@ class Factorydefaults
             category: Category.find_by_name(category_data['name'])
           )
         end
+      end
+    end
+    
+    def create_users
+      @users.each do |user_data|
+        user = User.new(
+          username: user_data['username'],
+          password: user_data['password'],
+          full_name: user_data['fullname'],
+          email: user_data['email'],
+          city: user_data['town'],
+          country: user_data['country'],
+          gps: user_data['gps']
+        )
+        user.skip_confirmation!
+        user.save!
       end
     end
     
