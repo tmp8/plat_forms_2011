@@ -1,14 +1,17 @@
 %h1= @conference.name
 
-%p
-  From
+%p.subline
+  from
   = @conference.startdate
   to
   = @conference.enddate
   in
   = @conference.location
-  = link_to "[iCal]", conference_ical_path(@conference)
-  
+  %span.ical
+    (
+    = link_to "iCal", conference_ical_path(@conference)
+    )
+    
 %h2 Description
 %p= @conference.description
 
@@ -33,7 +36,7 @@
 
 %h2 Attendees
 - unless @conference.participants.empty?
-  %ul.list
+  %ul.links
     - for perticipant in @conference.participants
       %li= user_info(perticipant)
 - else

@@ -26,6 +26,12 @@ p {
   margin-bottom: 2em;
 }
 
+p.subline {
+  font-family: "Adobe Caslon Pro", "Hoefler Text", Georgia, Garamond, Times, serif;
+  font-style: italic;
+  color: #424242;
+}
+
 ul.list {
   margin-bottom: 2em;
   
@@ -34,10 +40,23 @@ ul.list {
   }
 }
 
-ul.navigation li {
-  margin: 0.3em;
+ul.links {
+  margin-bottom: 2em;
+}
+
+ul.navigation {
   display: inline;
-  vertical-align: top;
+  
+  li {
+    margin: 0.3em;
+    display: inline;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size:24px;
+    margin-top: 5px;
+    text-align: center;
+    font-weight: normal;
+    color: #222;
+  }
 }
 
 .warn {

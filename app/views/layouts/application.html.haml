@@ -14,13 +14,14 @@
     = render :partial => 'shared/flash'
   #header
     #navigation
-      %ul.navigation
-        %li= link_to image_tag('cap.png', :alt => 'CaP'), root_path
+      = link_to image_tag('cap.png', :alt => 'CaP'), root_path
+      %ul.navigation.right
         - if current_user
-          %li= link_to("Sign Out", destroy_user_session_path)
+          %li= link_to "Add conference", new_conference_path
+          %li= link_to "Sign out", destroy_user_session_path
         - else
-          %li= link_to("Sign In", new_user_session_path)
-          %li= link_to("Register", new_user_registration_path) 
+          %li= link_to "Sign in", new_user_session_path
+          %li= link_to "Register", new_user_registration_path
     
   #content
     = yield

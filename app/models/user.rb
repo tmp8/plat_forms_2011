@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   has_many :series_contacts, :foreign_key => :contact_id
   has_many :series, :through => :series_contacts
   
-  has_many :organizing_conferences, :class_name => "Conference"
+  has_many :organizing_conferences, :class_name => "Conference", :foreign_key => :organizator_id
 
   def request_friendship(friend)
     self.friendships.create(:friend => friend)

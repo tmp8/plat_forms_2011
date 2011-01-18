@@ -6,7 +6,7 @@ class ConferencesController < ApplicationController
     @conference = current_user.organizing_conferences.new(params[:conference])
     respond_to do |format|
       if @conference.save
-        format.html { redirect_to(conferences_path, :notice => 'Conference was successfully created.') }
+        format.html { redirect_to(conference_path(@conference), :notice => 'Conference was successfully created.') }
         format.json { render :json => @conference.to_json }
       else
         format.html { render :action => "new" }

@@ -1,30 +1,27 @@
-= simple_form_for(@conference) do |f|
-  - if @conference.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@conference.errors.count, "error")
-        prohibited this conference from being saved:
+%p
+  = simple_form_for(@conference) do |f|
+    - if @conference.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@conference.errors.count, "error")
+          prohibited this conference from being saved:
 
-      %ul
-      - @conference.errors.full_messages.each do |msg|
-        %li= msg
+        %ul
+        - @conference.errors.full_messages.each do |msg|
+          %li= msg
 
-  .inputs
-    = f.input :name
-    = f.input :startdate
-    = f.input :enddate
-    = f.input :description
-    = f.input :location
+    .inputs
+      = f.input :name
+      = f.input :startdate
+      = f.input :enddate
+      = f.input :description
+      = f.input :location
 
-    = f.input :city
-    = f.input :gps
-    = f.input :lat
-    = f.input :lng
-    =# f.association :series
-    = f.input :venue
-    = f.input :accomodation
-    = f.input :howtofind
-    = country_code_select(:conference, :country_code, [['Germany', 'DE']])
+      = f.input :gps
+      =# f.association :series
+      = f.input :venue
+      = f.input :accomodation
+      = f.input :howtofind
 
-  .actions
-    = f.button :submit
+    .actions
+      = f.button :submit

@@ -20,10 +20,11 @@ class Conference < ActiveRecord::Base
 # FIXME  validates_presence_of :categories
   validates_presence_of :description
   validates_presence_of :location
+  validates_presence_of :creator
   
   default_scope :order => 'startdate ASC'
   
-  scope :running, :conditions => ['startdate >= CURDATE() AND enddate <= CURDATE()']
+  scope :running, :conditions => ['startdate <= CURDATE() AND enddate >= CURDATE()']
   scope :tomorrow, :conditions => ['startdate = CURDATE() + 1']
   
   searchable do 
