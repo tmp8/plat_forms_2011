@@ -178,7 +178,7 @@ DEPENDENCIES
   simple_form
   simplecov
   simplecov-rcov
-  sunspot_rails
+  sunspot_rails (= 1.2.rc4)
   timecop
   tmp8-snailgun
   webmock
