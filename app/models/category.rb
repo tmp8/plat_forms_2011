@@ -5,7 +5,7 @@ class Category < ActiveRecord::Base
   has_many :conference_categories
   has_many :conferences, :through => :conference_categories
   
-  named_scope :root, :conditions => 'parent_id is NULL'
+  scope :root, :conditions => 'parent_id is NULL'
   
   validates_presence_of :name
   

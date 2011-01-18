@@ -10,7 +10,11 @@ gem "hoptoad_notifier", "~> 2.3"
 gem "devise"
 gem "simple_form"
 gem "geokit"
+<<<<<<< HEAD
 gem "sunspot_rails", '1.2.rc4'
+=======
+gem "icalendar"
+>>>>>>> * ical for conference
 
 group :development do
   gem "capistrano"

@@ -35,6 +35,7 @@ class FactorydefaultsTest < ActiveSupport::TestCase
       assert_equal "DE", conference.country_code
     
       assert_equal [@technology, @it_security, @mobile_platforms, @design], conference.categories
+      assert_equal User.find_by_username('kzuse'), conference.creator
     end
   
     should "categories import" do

@@ -44,6 +44,21 @@ class ConferencesController < ApplicationController
     @conference = current_user.organizing_conferences.find(params[:id])
   end
   
+  def ical
+    conference = Conference.find(params[:conference_id])
+    
+    cal = Icalendar::Calendar.new
+    cal.event do
+      dtstart     conference.startdate
+      dtend       conference.enddate
+      summary     conference.name
+      description conference.description
+    end
+    
+    headers['Content-Type'] = "text/calendar; charset=UTF-8"
+    render :text => cal.to_ical, :layout => false
+  end
+  
   private 
     def throw_not_implemented_for_json
       if params[:format] == 'json'

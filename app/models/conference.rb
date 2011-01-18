@@ -7,6 +7,8 @@ class Conference < ActiveRecord::Base
   
   belongs_to :series
   
+  belongs_to :creator, :foreign_key => :organizator_id, :class_name => 'User'
+  
   has_many :conference_participations, :dependent => :destroy
   has_many :participants, :through => :conference_participations, :source => :user
   has_many :conference_categories, :dependent => :destroy
