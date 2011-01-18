@@ -1,4 +1,8 @@
 # origin: M
+
+# FIXME!
+WebMock.disable_net_connect!(:allow_localhost => true) if defined? WebMock
+
 class Conference < ActiveRecord::Base
   
   belongs_to :series
@@ -14,6 +18,36 @@ class Conference < ActiveRecord::Base
 # FIXME  validates_presence_of :categories
   validates_presence_of :description
   validates_presence_of :location
+  
+  searchable do 
+    text :text
+    text :description     
+    #    integer :category, :multiple => true, :using => :category_ids
+    date :startdate
+    # date :enddate
+    # string :country_code
+    # location :coordinates do
+    #   self
+    # end
+  end
+
+  def text
+    "#{name} #{description}"
+  end
+  
+  # def category_ids
+  # end
+
+  class << self
+    def query(term = nil, startdate = nil, enddate = nil)
+      Conference.search do
+        keywords(term) if term
+        # with(:startdate).greater_than(startdate - 1) if startdate
+        # with(:enddate).less_equal(enddate) if enddate
+        # with(:coordinates).near(a.lat.to_f, a.lng.to_f, :precision => 10) 
+      end.results
+    end
+  end
 
   def location=(location)
     write_attribute(:location, location)
