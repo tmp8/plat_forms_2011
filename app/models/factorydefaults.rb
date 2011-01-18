@@ -7,9 +7,9 @@ class Factorydefaults
   
   def load
     empty_tables
+    create_users
     create_categories
     create_conferences
-    create_users
     create_series
     create_admin_user
   end
@@ -70,6 +70,7 @@ class Factorydefaults
           howtofind: conference_data['howtofind'],
           startdate: conference_data['startdate'],
           enddate: conference_data['enddate'],
+          creator: User.find_by_username(conference_data['creator']['username'])
         )
         
         conference_data['categories'].each do |category_data|

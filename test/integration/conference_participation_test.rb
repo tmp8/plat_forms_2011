@@ -13,8 +13,8 @@ class ConferenceParticipationTest < ActionDispatch::IntegrationTest
   should "allow user to participate" do
     sign_in(@user)
     visit conference_path(@conference)
-    click_link_or_button("Attend")
-    click_link_or_button("Wont attend")
-    click_link_or_button("Attend")
+    click_link_or_button("Attend!")
+    click_link_or_button("Won't attend!")
+    click_link_or_button("Attend!")
   end
 end

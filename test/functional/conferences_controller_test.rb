@@ -3,6 +3,17 @@ require 'test_helper'
 class ConferencesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
   
+  context "ical" do
+    should "export conference as ical" do
+      sign_in(create_activated_user)
+      
+      conference = Factory(:conference)
+      get :ical, :conference_id => conference.id
+      
+      assert_match /BEGIN:VCALENDAR/, response.body
+    end
+  end
+  
   context "ws" do
     
     setup do

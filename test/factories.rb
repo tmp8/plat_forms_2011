@@ -25,6 +25,7 @@ Factory.define :conference do |f|
   f.enddate { Date.today + 1 }
   f.description { Faker::Lorem.sentence }
   f.location { Faker::Lorem.sentence }
+  f.association :creator, :factory => :user
 end
 
 Factory.define :conference_participation do |f|

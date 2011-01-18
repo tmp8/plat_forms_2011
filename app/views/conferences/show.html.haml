@@ -1,5 +1,41 @@
 %h1= @conference.name
 
-= attend_or_unattend_button
+%p
+  From
+  = @conference.startdate
+  to
+  = @conference.enddate
+  in
+  = @conference.location
+  = link_to "[iCal]", conference_ical_path(@conference)
+  
+%h2 Description
+%p= @conference.description
 
-= render :partial => "participant", :collection => @conference.participants
+- unless @conference.venue.blank?
+  %h2 Venue
+  %p= @conference.venue
+
+- unless @conference.howtofind.blank?
+  %h2 How to find
+  %p= @conference.howtofind
+
+- unless @conference.accomodation.blank?
+  %h2 Accomodation
+  %p= @conference.accomodation
+  
+%h2 Organizer
+%p
+  = @conference.creator.full_name
+  (
+  = link_to @conference.creator.email, "mailto:#{@conference.creator.email}"
+  )
+
+%h2 Attendees
+- unless @conference.participants.empty?
+  %ul.list
+    - for perticipant in @conference.participants
+      %li= user_info(perticipant)
+- else
+  %p.warn No attendees so far
+= attend_or_unattend_button
