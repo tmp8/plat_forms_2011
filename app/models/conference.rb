@@ -22,26 +22,33 @@ class Conference < ActiveRecord::Base
   searchable do 
     text :text
     text :description     
-    #    integer :category, :multiple => true, :using => :category_ids
+    integer :category, :multiple => true, :using => :category_ids
     date :startdate
+    
     # date :enddate
     # string :country_code
-    # location :coordinates do
-    #   self
-    # end
+    
+    location :coordinates do
+      self
+    end
   end
 
   def text
     "#{name} #{description}"
   end
   
-  # def category_ids
-  # end
+  def category_ids
+    categories.map(&:id)
+  end
 
   class << self
-    def query(term = nil, startdate = nil, enddate = nil)
+    def query(term = nil, startdate = nil, enddate = nil, categories = nil)
       Conference.search do
         keywords(term) if term
+
+        with(:category).any_of(categories.map(&:id)) if categories
+
+        # with(:coordinates).near(BigDecimal.new('40.7'), BigDecimal.new('-73.5'))
         # with(:startdate).greater_than(startdate - 1) if startdate
         # with(:enddate).less_equal(enddate) if enddate
         # with(:coordinates).near(a.lat.to_f, a.lng.to_f, :precision => 10) 
