@@ -56,7 +56,7 @@ class ActiveSupport::TestCase
   def activated_user
     user = Factory.build(:user)
     user.skip_confirmation!
-    user.save
+    user.save!
     user
   end
   

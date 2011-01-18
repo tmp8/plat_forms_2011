@@ -6,8 +6,13 @@ module GPS
   module_function :lat_lng_from_string
   
   def geocode(string)
-    geo_loc = Geokit::Geocoders::GoogleGeocoder.geocode(CGI::escape(string))
-    {city: geo_loc.city, country_code: geo_loc.country_code}
+    {city: nil, country_code: nil}.tap do |result|
+      unless string.blank?
+        geo_loc = Geokit::Geocoders::GoogleGeocoder.geocode(CGI::escape(string))
+        result[:city] = geo_loc.city
+        result[:country_code] = geo_loc.country_code
+      end
+    end
   end
   module_function :geocode
 end
