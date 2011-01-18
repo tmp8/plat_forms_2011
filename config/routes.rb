@@ -2,10 +2,13 @@ PlatForms2011::Application.routes.draw do
   devise_for :users
   
   resources :conferences do
+    match "ical" => 'conferences#ical'
     resources :conference_participations
   end
   
   root :to => "welcome#hello"
+  
+  resources :categories, :only => [:show]
   
   scope "ws", :as => "ws", :defaults => { :format => 'json' } do
     resources :conferences, :only => [:create, :show, :update, :index, :destroy]

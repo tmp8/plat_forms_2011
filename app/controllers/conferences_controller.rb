@@ -6,7 +6,7 @@ class ConferencesController < ApplicationController
     @conference = current_user.organizing_conferences.new(params[:conference])
     respond_to do |format|
       if @conference.save
-        format.html { redirect_to(conferences_path, :notice => 'Conference was successfully created.') }
+        format.html { redirect_to(conference_path(@conference), :notice => 'Conference was successfully created.') }
         format.json { render :json => @conference.to_json }
       else
         format.html { render :action => "new" }
@@ -42,6 +42,21 @@ class ConferencesController < ApplicationController
 
   def edit
     @conference = current_user.organizing_conferences.find(params[:id])
+  end
+  
+  def ical
+    conference = Conference.find(params[:conference_id])
+    
+    cal = Icalendar::Calendar.new
+    cal.event do
+      dtstart     conference.startdate
+      dtend       conference.enddate
+      summary     conference.name
+      description conference.description
+    end
+    
+    headers['Content-Type'] = "text/calendar; charset=UTF-8"
+    render :text => cal.to_ical, :layout => false
   end
   
   private 

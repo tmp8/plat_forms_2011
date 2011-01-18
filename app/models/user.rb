@@ -1,7 +1,7 @@
 # origin: GM
 
 class User < ActiveRecord::Base
-  include GPSResolver
+
 
   NO_CONTACT = 0
   RCD_SENT = 1
@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   has_many :series_contacts, :foreign_key => :contact_id
   has_many :series, :through => :series_contacts
   
-  has_many :organizing_conferences, :class_name => "Conference"
+  has_many :organizing_conferences, :class_name => "Conference", :foreign_key => :organizator_id
 
   def request_friendship(friend)
     self.friendships.create(:friend => friend)
@@ -78,11 +78,22 @@ class User < ActiveRecord::Base
   def participation_for(conference)
     conference_participations.detect { |cp| cp.conference == conference }
   end
+
+  def gps=(gps)
+    unless gps.blank?
+      lat, lng = GPS.lat_lng_from_string(gps)
+      write_attribute(:lat, lat)
+      write_attribute(:lng, lng)
+    else
+      write_attribute(:lat, nil)
+      write_attribute(:lng, nil)
+    end
+    write_attribute(:gps, gps)
+  end
   
   protected
-
-  def self.find_for_database_authentication(conditions)
-    login = conditions.delete(:login)
-    where(conditions).where(["username = :value OR email = :value", { :value => login }]).first
-  end
+    def self.find_for_database_authentication(conditions)
+      login = conditions.delete(:login)
+      where(conditions).where(["username = :value OR email = :value", { :value => login }]).first
+    end
 end
