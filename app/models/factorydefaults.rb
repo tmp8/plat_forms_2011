@@ -1,13 +1,14 @@
 class Factorydefaults
   
   def initialize
-    @users, @categories, @conference_series, @conferences = load_json_data
+    @users, @categories, @series, @conferences = load_json_data
   end
   
   def load
     create_categories
     create_conferences
     create_users
+    create_series
   end
   
   private
@@ -63,6 +64,19 @@ class Factorydefaults
         )
         user.skip_confirmation!
         user.save!
+      end
+    end
+    
+    def create_series
+      @series.each do |series_data|
+        series = Series.create!(name: series_data['name'])
+        
+        series_data['contacts'].each do |series_contact_data|
+          SeriesContact.create!(
+            series: series,
+            contact: User.find_by_username(series_contact_data['username'])
+          )
+        end
       end
     end
     
