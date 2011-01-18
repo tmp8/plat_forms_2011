@@ -15,6 +15,10 @@ end
 
 Factory.define :conference do |f|
   f.name  { Faker::Name.name }
+  f.startdate { Date.today }
+  f.enddate { Date.today + 1 }
+  f.description { Faker::Lorem.sentence }
+  f.location { Faker::Lorem.sentence }
 end
 
 Factory.define :conference_participation do |f|
