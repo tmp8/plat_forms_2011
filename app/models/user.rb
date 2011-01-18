@@ -1,7 +1,7 @@
 # origin: GM
 
 class User < ActiveRecord::Base
-  include GPSResolver
+
 
   NO_CONTACT = 0
   RCD_SENT = 1
@@ -78,11 +78,22 @@ class User < ActiveRecord::Base
   def participation_for(conference)
     conference_participations.detect { |cp| cp.conference == conference }
   end
+
+  def gps=(gps)
+    unless gps.blank?
+      lat, lng = GPS.lat_lng_from_string(gps)
+      write_attribute(:lat, lat)
+      write_attribute(:lng, lng)
+    else
+      write_attribute(:lat, nil)
+      write_attribute(:lng, nil)
+    end
+    write_attribute(:gps, gps)
+  end
   
   protected
-
-  def self.find_for_database_authentication(conditions)
-    login = conditions.delete(:login)
-    where(conditions).where(["username = :value OR email = :value", { :value => login }]).first
-  end
+    def self.find_for_database_authentication(conditions)
+      login = conditions.delete(:login)
+      where(conditions).where(["username = :value OR email = :value", { :value => login }]).first
+    end
 end

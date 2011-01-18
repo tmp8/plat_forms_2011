@@ -14,4 +14,8 @@ class Category < ActiveRecord::Base
     sub_categories.each { |category| category.conferences_including_subs(conferences) }
     conferences.flatten.uniq
   end
+
+  def self_with_ancestors
+    [self, sub_categories.map(&:self_with_ancestors)].flatten
+  end
 end
