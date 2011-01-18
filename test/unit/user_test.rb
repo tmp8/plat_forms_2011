@@ -1,8 +1,15 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+
+  context "validations" do
+    
+    setup do
+      @user = Factory(:user)
+    end
+    
+    should validate_presence_of(:username)
+    should validate_presence_of(:country)
   end
+  
 end
