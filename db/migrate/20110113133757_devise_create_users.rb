@@ -1,4 +1,4 @@
-# origin: M
+# origin: G
 
 class DeviseCreateUsers < ActiveRecord::Migration
   def self.up

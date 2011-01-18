@@ -17,4 +17,18 @@ class ActiveSupport::TestCase
   include RR::Adapters::TestUnit
 
   # Add more helper methods to be used by all tests here...
+  
+  protected
+  
+  def activated_user
+    user = Factory.build(:user)
+    user.skip_confirmation!
+    user.save
+    user
+  end
+  
+  # verbatim, from ActiveController's own unit tests
+   def encode_credentials(username, password)
+     "Basic #{ActiveSupport::Base64.encode64("#{username}:#{password}")}"
+   end
 end

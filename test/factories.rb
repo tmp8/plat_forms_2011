@@ -13,7 +13,7 @@ Factory.define :friendship do |f|
 end
 
 Factory.define :conference do |f|
-  f.name :name
+  f.name  { Faker::Name.name }
 end
 
 Factory.define :conference_participation do |f|
