@@ -2,6 +2,21 @@ PlatForms2011::Application.routes.draw do
   devise_for :users
   
   root :to => "welcome#hello"
+  
+  scope "ws", :as => "ws", :defaults => { :format => 'json' } do
+    resources :conferences, :only => [:create, :show, :update, :index, :destroy]
+    resources :users, :path => "members", :only => [:create, :show, :update] do
+      resources :contacts, :only => [:create, :index]
+    end
+    resources :categories, :only => [:index, :show, :create]
+    resources :series, :only => [:index, :show, :create]
+    match "/conferencesbycategory" => "categories#conferences"
+    match "/search" => "search#search"
+    match "/reset" => "maintenance#reset"
+    match "/factorydefaults" => "maintenance#factorydefaults"    
+  end
+  
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

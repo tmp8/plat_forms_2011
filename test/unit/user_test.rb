@@ -11,14 +11,4 @@ class UserTest < ActiveSupport::TestCase
     should validate_presence_of(:username)
     should validate_presence_of(:country)
   end
-  
-  context "associations" do
-    
-    setup do
-      @user = Factory(:user)
-    end
-    
-    should have_many(:organizing_conferences)
-  end
-  
 end

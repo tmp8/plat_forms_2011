@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   RCD_RECEIVED = 2
   IN_CONTACT = 3
 
+  attr_accessor :login
+  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable, :confirmable,
@@ -13,7 +15,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :full_name, :country, 
-                  :city, :username, :lat, :lng
+                  :city, :username, :lat, :lng, :login
                   
   validates_presence_of :username
   validates_presence_of :country
@@ -26,7 +28,7 @@ class User < ActiveRecord::Base
   has_many :conference_participations
   has_many :conferences, :through => :conference_participations
   
-  has_many :organizing_conferences
+  has_many :organizing_conferences, :class_name => "Conference"
 
   def request_friendship(friend)
     self.friendships.create(:friend => friend)
@@ -53,5 +55,12 @@ class User < ActiveRecord::Base
   def wont_attend!(conference)
     attending = conference_participations.detect { |cp| cp.conference == conference }
     attending.destroy if attending
+  end
+  
+  protected
+
+  def self.find_for_database_authentication(conditions)
+    login = conditions.delete(:login)
+    where(conditions).where(["username = :value OR email = :value", { :value => login }]).first
   end
 end
