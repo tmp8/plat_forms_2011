@@ -32,7 +32,7 @@
     "email" : "edsger.dijkstra@example.com",
     "town" : "Eindhoven",
     "country" : "Netherlands",
-    "gps" : "51.26N,5.29O"
+    "gps" : ""
 },
 {
     "username" : "lpage",
@@ -77,7 +77,7 @@
     "email" : "konrad.zuse@example.com",
     "town" : "Berlin",
     "country" : "Germany",
-    "gps" : "52.29N,13.22O"
+    "gps" : ""
 },
 {
     "username" : "swozniak",
@@ -667,7 +667,7 @@
     }],
     "description" : "",
     "location" : "Vancouver, Canada",
-    "gps" : "N49.292032,123.130976W",
+    "gps" : "49.292032N,123.130976W",
     "venue" : "The Westin Bayshore",
     "accomodation" : "",
     "howtofind" : ""
@@ -718,7 +718,7 @@
     }],
     "description" : "PPoPP is a forum for leading work on all aspects of parallel programming, including foundational and theoretical aspects, techniques, tools, and practical experiences.",
     "location" : "San Antonio, Texas 78205 USA",
-    "gps" : "N29.422848,98.48287W",
+    "gps" : "29.422848N,98.48287W",
     "venue" : "San Antonio Marriott Rivercenter",
     "accomodation" : "",
     "howtofind" : ""
@@ -889,7 +889,7 @@
     }],
     "description" : "International Conference on Advanced Computing & Communication Technologies promises to address current state of the technology and the outcome of the ongoing research in the area of advance computing and communication. ACCT11 would offer a forum to the academicians, researchers and students to interact with experts in the area and to learn the recent knowledge in advance computing. It invites papers original & unpublished work from individuals active in the broad theme of the conference.",
     "location" : "Rohtak, India",
-    "gps" : "xxx",
+    "gps" : "",
     "venue" : "Gymkhana Club, HUDA Sector 4, Rohtak",
     "accomodation" : "",
     "howtofind" : ""
@@ -923,7 +923,7 @@
     }],
     "description" : "The aim objective of ICMLC 2011 is to provide a platform for researchers, engineers, academicians as well as industrial professionals from all over the world to present their research results and development activities in Machine Learning and Computing. This conference provides opportunities for the delegates to exchange new ideas and application experiences face to face, to establish business or research relations and to find global partners for future collaboration.",
     "location" : "Singapore, Singapore",
-    "gps" : "xxx",
+    "gps" : "",
     "venue" : "Location to be decided",
     "accomodation" : "",
     "howtofind" : ""
