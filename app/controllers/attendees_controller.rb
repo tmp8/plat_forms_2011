@@ -1,3 +1,5 @@
+#origin M
+
 class AttendeesController < ApplicationController
   
   before_filter :authenticate_user!
@@ -18,7 +20,7 @@ class AttendeesController < ApplicationController
       if user != current_user
         render :json => "Forbidden", :status => 403
       else
-        @conference.participants << user
+        user.attend!(@conference)
         render :json => "", :status => 204
       end
     else
@@ -31,7 +33,7 @@ class AttendeesController < ApplicationController
       if user != current_user
         render :json => "Forbidden", :status => 403
       else
-        @conference.participants.delete(user)
+        user.wont_attend!(@conference)
         render :json => "", :status => 204
       end
     else
