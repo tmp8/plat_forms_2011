@@ -1,3 +1,5 @@
+#origin M
+
 class ConferencesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :throw_not_implemented_for_json, :only => [:index, :destroy]
