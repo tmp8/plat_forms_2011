@@ -80,6 +80,10 @@ class User < ActiveRecord::Base
     write_attribute(:country, country)
   end
   
+  def town=(town)
+    self.city = town
+  end
+  
   def participation_for(conference)
     conference_participations.detect { |cp| cp.conference == conference }
   end
