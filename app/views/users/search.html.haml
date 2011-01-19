@@ -2,12 +2,9 @@
 = simple_form_for(@user, :url => search_users_path, :html => {:method => :get}) do |f|
   .inputs
     = f.input :username
-    =# f.input :startdate, :include_blank => true
-    =# f.input :enddate, :include_blank => true
-    =# f.association :categories, :collection => Category.for_select
 
   .actions
-    = f.submit :submit
+    = f.submit 'Search'
 %p
 - if !@empty_form
   %h2 Results
@@ -18,9 +15,8 @@
       %ul
       - for user in @users
         %li
-          - if current_user && (current_user.friend_state(user) == User::NO_CONTACT)
+          - if !current_user.friends_with?(user) && !current_user.friendship_requests.map(&:friend).include?(user)
             = check_box_tag "user[#{user.id}]", 1
           = link_to user_info(user), user
           = "( #{user.city}, #{user.country} )"
-      - if current_user
-        = submit_tag "Make friends!"
+      = submit_tag "Make friends!", :class => 'make_friends'

@@ -25,6 +25,7 @@ PlatForms2011::Application.routes.draw do
     end
     member do
       post 'confirm'
+      post 'reject'
     end
   end
   

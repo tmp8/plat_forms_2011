@@ -37,5 +37,10 @@ class UserTest < ActiveSupport::TestCase
       assert_equal [@thies], User.find_by_term("thies", @admin)
       assert_equal [@thies], User.find_by_term("thies", @lurker)
     end
+    
+    should "be friends" do
+      assert @admin.friends_with?(@thies)
+      assert @thies.friends_with?(@admin)
+    end
   end
 end

@@ -3,19 +3,20 @@
     Your Profile
   - else
     Profile of
-    = @user.full_name
+    = current_user.friends_with?(@user) ? @user.full_name : @user.username
     
 %h2 Details
 %table
   %tr
     %td Username:
     %td= @user.username
-  %tr
-    %td Full name:
-    %td= @user.full_name
-  %tr
-    %td Email:
-    %td= @user.email
+  - if current_user.friends_with?(@user)
+    %tr
+      %td Full name:
+      %td= @user.full_name
+    %tr
+      %td Email:
+      %td= @user.email
   %tr
     %td Town:
     %td= @user.city
@@ -28,31 +29,33 @@
   %tr
     %td Longitude:
     %td= @user.lng
-    
-%h2 Friends
-- if @user.friends.empty?
-  %p.warn
-    Uhh? You have no friends here!
-    = link_to 'Make some', search_users_path
-- else
-  %ul.links
-    - for friend in @user.friends
-      %li= user_info(friend)
+- if current_user == @user    
+  %h2 Friends
+  - if @user.friends.empty?
+    %p.warn
+      Uhh? You have no friends here!
+      = link_to 'Make some.', search_users_path
+  - else
+    %ul.links
+      - for friend in @user.friends
+        %li= user_info(friend)
       
-%h2 Friendship request
-- if @user.friendship_requests.empty?
-  %p.warn No outstanding friendship requests.
-- else
-  %ul.links
-    - for friend in @user.friendship_requests.map(&:friend)
-      %li= user_info(friend)
+  %h2 Friendship request
+  - if @user.friendship_requests.empty?
+    %p.warn No outstanding friendship requests.
+  - else
+    %ul.links
+      - for friend in @user.friendship_requests.map(&:friend)
+        %li= user_info(friend)
       
-%h2 Friendship invitations
-- if @user.friendship_invitations.empty?
-  %p.warn No friendship invitations.
-- else
-  %ul.links
-    - for friendship in @user.friendship_invitations
-      %li
-        = friendship.user.full_name
-        = button_to 'Confirm!', confirm_friendship_request_path(friendship), :class => 'confirm_friendship'
+  %h2 Friendship invitations
+  - if @user.friendship_invitations.empty?
+    %p.warn No friendship invitations.
+  - else
+    %ul.links
+      - for friendship in @user.friendship_invitations
+        %li
+          = button_to 'Confirm!', confirm_friendship_request_path(friendship), :class => 'confirm_friendship'
+          = button_to 'Reject!', reject_friendship_request_path(friendship), :class => 'reject_friendship', :confirm => "You don't want to be friends?" 
+          \-
+          = friendship.user.full_name
