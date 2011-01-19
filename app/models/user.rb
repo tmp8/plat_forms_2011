@@ -19,8 +19,13 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :full_name, :country, 
                   :city, :username, :gps, :login
                   
+  validates_presence_of :full_name
+  validates_presence_of :email
   validates_presence_of :username
+  validates_presence_of :city
   validates_presence_of :country
+
+  validates_uniqueness_of :username
 
   has_many :friendships
   has_many :friends, :through => :friendships

@@ -4,7 +4,7 @@ class ConferenceParticipationTest < ActionDispatch::IntegrationTest
 
   background do 
     @user = Factory(:user)
-    @user.confirmed_at = Time.now 
+    @user.skip_confirmation!
     @user.save!
     
     @conference = Factory(:conference)

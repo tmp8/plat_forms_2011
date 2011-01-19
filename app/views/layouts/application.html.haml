@@ -1,7 +1,7 @@
 !!! 5
 %head
   %title PlatForms2011
-  = stylesheet_link_tag 'http://yui.yahooapis.com/2.8.1/build/reset/reset-min.css'
+  = stylesheet_link_tag 'reset-min.css'
   = stylesheet_link_tag :all
   = stylesheet_link_tag 'application.css'
 
@@ -15,7 +15,7 @@
   #header
     #navigation
       = link_to image_tag('cap.png', :alt => 'CaP'), root_path
-      %ul.navigation.right
+      %ul.navigation
         - if current_user
           %li= link_to "Add conference", new_conference_path
           %li= link_to "Sign out", destroy_user_session_path
