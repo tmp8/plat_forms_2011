@@ -11,7 +11,6 @@ end
 WebMock.disable_net_connect!(:allow_localhost => true) if defined? WebMock
 
 class Conference < ActiveRecord::Base
-  
   belongs_to :series
   
   belongs_to :creator, :foreign_key => :organizator_id, :class_name => 'User'
@@ -73,7 +72,7 @@ class Conference < ActiveRecord::Base
       
       solr = Conference.search do
         keywords(term) if term
-        with(:category).any_of(categories.map(&:id)) if categories
+        with(:category).any_of(categories.map(&:id)) if categories and categories.any?
         with(:open_on).greater_than(startdate.to_i) if startdate
         with(:open_on).less_than(enddate.to_i) if enddate
 
