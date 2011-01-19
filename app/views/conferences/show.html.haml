@@ -66,6 +66,6 @@
               = check_box_tag "user[#{friend.id}]", 1
             - else
               %span.warn IV
-          = link_to user_info(friend), user_path(participant)
+          = link_to user_info(friend), user_path(friend)
       = submit_tag "Invite friends to this conference!", :class => 'invite_friends_to_conference'
     
