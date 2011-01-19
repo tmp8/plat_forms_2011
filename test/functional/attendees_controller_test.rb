@@ -12,7 +12,7 @@ class AttendeesControllerTest < ActionController::TestCase
       User.delete_all
       @user = create_activated_user
       @conference = Factory(:conference, :organizator => @user)
-      @request.env['HTTP_AUTHORIZATION'] = encode_credentials(@user.username, "123456")
+      login_with_basic_auth(@user)
     end
     
     context "index" do

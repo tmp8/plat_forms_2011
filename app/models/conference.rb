@@ -83,12 +83,8 @@ class Conference < ActiveRecord::Base
       end
       solr.results
     end
-  end
-
-  class << self
     
-    def build_from_json(conference_json, user)
-      conference_hash = JSON.parse(CGI.unescape(conference_json))
+    def build_from_json(conference_hash, user)
       categories = conference_hash.delete("categories")
       conference = new(conference_hash)
       conference.organizator = user
