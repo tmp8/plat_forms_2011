@@ -1,6 +1,9 @@
 PlatForms2011::Application.routes.draw do
   devise_for :users
   
+  root :to => "welcome#hello"
+  
+  resources :users, :only => [:show]
   resources :conferences do
     collection do 
       get :search
@@ -9,9 +12,6 @@ PlatForms2011::Application.routes.draw do
     match "ical" => "conferences#ical"
     resources :conference_participations
   end
-  
-  root :to => "welcome#hello"
-  
   resources :categories, :only => [:show]
   
   scope "ws", :as => "ws", :defaults => { :format => 'json' } do

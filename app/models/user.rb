@@ -100,6 +100,10 @@ class User < ActiveRecord::Base
     write_attribute(:gps, gps)
   end
   
+  def to_param
+    username
+  end
+  
   protected
     def self.find_for_database_authentication(conditions)
       login = conditions.delete(:login)
