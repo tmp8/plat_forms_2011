@@ -30,7 +30,7 @@ namespace :deploy do
 
   desc "cause App to initiate a restart"
   task :restart do
-    run "cd #{current_path}; rake sunspot:solr:stop sunspot:solr:start sunspot:reindex RAILS_ENV=production "
+    run "cd #{current_path}; rake sunspot:reindex RAILS_ENV=production"
     run "touch #{current_path}/tmp/restart.txt" 
   end
 
