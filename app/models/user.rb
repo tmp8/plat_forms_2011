@@ -28,9 +28,10 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username
 
   has_many :friendships
-  has_many :friends, :through => :friendships
+  has_many :friends, :through => :friendships, :conditions => {:friendships => {:status => Friendship::CONFIRMED }}
 
-  has_many :friendship_requests, :class_name => "Friendship", :foreign_key => "friend_id"    
+  has_many :friendship_requests, :class_name => "Friendship", :foreign_key => "user_id", :conditions => {:friendships => {:status => Friendship::OUTSTANDING }}
+  has_many :friendship_invitations, :class_name => "Friendship", :foreign_key => "friend_id", :conditions => {:friendships => {:status => Friendship::OUTSTANDING }}
   
   has_many :conference_participations
   has_many :conferences, :through => :conference_participations

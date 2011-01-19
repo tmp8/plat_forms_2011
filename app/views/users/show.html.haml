@@ -1,1 +1,56 @@
-foo
+%h1
+  - if @user == current_user
+    Your Profile
+  - else
+    Profile of
+    = @user.full_name
+    
+%h2 Details
+%table
+  %tr
+    %td Username:
+    %td= @user.username
+  %tr
+    %td Full name:
+    %td= @user.full_name
+  %tr
+    %td Email:
+    %td= @user.email
+  %tr
+    %td Town:
+    %td= @user.city
+  %tr
+    %td Country:
+    %td= @user.country
+  %tr
+    %td Latitude:
+    %td= @user.lat
+  %tr
+    %td Longitude:
+    %td= @user.lng
+    
+%h2 Friends
+- if @user.friends.empty?
+  %p.warn
+    Uhh? You have no friends here!
+    = link_to 'Make some', '#' #search_user_path
+- else
+  %ul
+    - for friend in @user.friends
+      %li= user_info(friend)
+      
+%h2 Friendship request
+- if @user.friendship_requests.outstanding.empty?
+  %p.warn No friendship reqúests.
+- else
+  %ul
+    - for friend in @user.friendship_requests.outstanding
+      %li= user_info(friend)
+      
+%h2 Friendship invitations
+- if @user.friendship_invitations.empty?
+  %p.warn No friendship invittions.
+- else
+  %ul
+    - for friend in @user.outstanding
+      %li= user_info(friend)

@@ -5,7 +5,6 @@
 class Friendship < ActiveRecord::Base
   OUTSTANDING = 0
   CONFIRMED = 1
-  REJECTED = -1
 
   belongs_to :user
   belongs_to :friend, :class_name => "User", :foreign_key => "friend_id"
