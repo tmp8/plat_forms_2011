@@ -1,16 +1,30 @@
 PlatForms2011::Application.routes.draw do
   devise_for :users
   
+  root :to => "welcome#hello"
+  
+  resources :users, :only => [:search, :show] do 
+    collection do 
+      get :search
+    end
+  end
+
   resources :conferences do
     collection do 
       get :search
-      post :search
     end
     match "ical" => "conferences#ical"
     resources :conference_participations
   end
   
-  root :to => "welcome#hello"
+  resources :friendship_requests do
+    collection do
+      post :send_many
+    end
+    member do
+      post 'confirm'
+    end
+  end
   
   resources :categories, :only => [:show]
   

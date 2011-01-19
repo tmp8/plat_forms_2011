@@ -29,7 +29,7 @@
   
 %h2 Organizer
 %p
-  = @conference.creator.full_name
+  = link_to @conference.creator.full_name, user_path(@conference.creator)
   (
   = link_to @conference.creator.email, "mailto:#{@conference.creator.email}"
   )
@@ -38,8 +38,8 @@
 %h2 Attendees
 - unless @conference.participants.empty?
   %ul.links
-    - for perticipant in @conference.participants
-      %li= user_info(perticipant)
+    - for participant in @conference.participants
+      %li= link_to user_info(participant), user_path(participant)
 - else
   %p.warn No attendees so far
 %p= attend_or_unattend_button

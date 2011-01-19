@@ -22,18 +22,28 @@ h2 {
 }
 
 /* line 24, ../../app/stylesheets/application.scss */
-p {
+table {
   margin-bottom: 2em;
 }
 
 /* line 28, ../../app/stylesheets/application.scss */
+td {
+  padding: 0em 1em 0em 0em;
+}
+
+/* line 32, ../../app/stylesheets/application.scss */
+p {
+  margin-bottom: 2em;
+}
+
+/* line 36, ../../app/stylesheets/application.scss */
 p.subline {
   font-family: "Adobe Caslon Pro", "Hoefler Text", Georgia, Garamond, Times, serif;
   font-style: italic;
   color: #424242;
 }
 
-/* line 34, ../../app/stylesheets/application.scss */
+/* line 42, ../../app/stylesheets/application.scss */
 legend {
   padding: 2em 0em 1em 0em;
   font-family: Gill Sans, Verdana;
@@ -44,25 +54,35 @@ legend {
   font-weight: bold;
 }
 
-/* line 45, ../../app/stylesheets/application.scss */
+/* line 53, ../../app/stylesheets/application.scss */
+form {
+  display: inline;
+}
+
+/* line 57, ../../app/stylesheets/application.scss */
+form.button_to div {
+  display: inline;
+}
+
+/* line 61, ../../app/stylesheets/application.scss */
 ul.list {
   margin-bottom: 2em;
 }
-/* line 48, ../../app/stylesheets/application.scss */
+/* line 64, ../../app/stylesheets/application.scss */
 ul.list li {
   margin-left: 1em;
 }
 
-/* line 53, ../../app/stylesheets/application.scss */
+/* line 69, ../../app/stylesheets/application.scss */
 ul.links {
   margin-bottom: 2em;
 }
 
-/* line 57, ../../app/stylesheets/application.scss */
+/* line 73, ../../app/stylesheets/application.scss */
 ul.navigation {
   display: inline;
 }
-/* line 60, ../../app/stylesheets/application.scss */
+/* line 76, ../../app/stylesheets/application.scss */
 ul.navigation li {
   margin: 0.3em;
   display: inline;
@@ -74,45 +94,45 @@ ul.navigation li {
   color: #222;
 }
 
-/* line 72, ../../app/stylesheets/application.scss */
+/* line 88, ../../app/stylesheets/application.scss */
 .warn {
   color: #c8782a;
 }
 
-/* line 76, ../../app/stylesheets/application.scss */
+/* line 92, ../../app/stylesheets/application.scss */
 .message {
   padding: 0 1em;
   text-align: center;
   border-bottom: 1px solid #000;
 }
 
-/* line 82, ../../app/stylesheets/application.scss */
+/* line 98, ../../app/stylesheets/application.scss */
 .notice {
   background-color: #9eee54;
   color: green;
 }
 
-/* line 87, ../../app/stylesheets/application.scss */
+/* line 103, ../../app/stylesheets/application.scss */
 .alert {
   background-color: #ee5b54;
   color: #000;
 }
 
 /* divs */
-/* line 94, ../../app/stylesheets/application.scss */
+/* line 110, ../../app/stylesheets/application.scss */
 #navigation {
   background-color: #efe;
   padding: 1em 1em 1.5em 1em;
   border-bottom: 1px dotted #000;
 }
 
-/* line 100, ../../app/stylesheets/application.scss */
+/* line 116, ../../app/stylesheets/application.scss */
 #content {
   margin: 2em;
 }
 
 /* Some default Styles for Simple-Form */
-/* line 106, ../../app/stylesheets/application.scss */
+/* line 122, ../../app/stylesheets/application.scss */
 .simple_form label {
   float: left;
   width: 100px;
@@ -120,66 +140,66 @@ ul.navigation li {
   margin: 2px 10px;
 }
 
-/* line 113, ../../app/stylesheets/application.scss */
+/* line 129, ../../app/stylesheets/application.scss */
 .simple_form div.input {
   margin-bottom: 10px;
 }
 
-/* line 117, ../../app/stylesheets/application.scss */
+/* line 133, ../../app/stylesheets/application.scss */
 .simple_form div.boolean, .simple_form input[type='submit'] {
   margin-left: 120px;
 }
 
-/* line 121, ../../app/stylesheets/application.scss */
+/* line 137, ../../app/stylesheets/application.scss */
 .simple_form div.boolean label {
   float: none;
   margin: 0;
 }
 
 /* scaffold css */
-/* line 128, ../../app/stylesheets/application.scss */
+/* line 144, ../../app/stylesheets/application.scss */
 body {
   background-color: #fff;
   color: #333;
 }
 
-/* line 130, ../../app/stylesheets/application.scss */
+/* line 146, ../../app/stylesheets/application.scss */
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
 }
 
-/* line 136, ../../app/stylesheets/application.scss */
+/* line 152, ../../app/stylesheets/application.scss */
 pre {
   background-color: #eee;
   padding: 10px;
   font-size: 11px;
 }
 
-/* line 142, ../../app/stylesheets/application.scss */
+/* line 158, ../../app/stylesheets/application.scss */
 a {
   color: #000;
 }
 
-/* line 143, ../../app/stylesheets/application.scss */
+/* line 159, ../../app/stylesheets/application.scss */
 a:visited {
   color: #666;
 }
 
-/* line 145, ../../app/stylesheets/application.scss */
+/* line 161, ../../app/stylesheets/application.scss */
 div.field, div.actions {
   margin-bottom: 10px;
 }
 
-/* line 149, ../../app/stylesheets/application.scss */
+/* line 165, ../../app/stylesheets/application.scss */
 .field_with_errors {
   padding: 2px;
   background-color: red;
   display: table;
 }
 
-/* line 155, ../../app/stylesheets/application.scss */
+/* line 171, ../../app/stylesheets/application.scss */
 #error_explanation {
   width: 450px;
   border: 2px solid red;
@@ -189,7 +209,7 @@ div.field, div.actions {
   background-color: #f0f0f0;
 }
 
-/* line 164, ../../app/stylesheets/application.scss */
+/* line 180, ../../app/stylesheets/application.scss */
 #error_explanation h2 {
   text-align: left;
   font-weight: bold;
@@ -201,7 +221,7 @@ div.field, div.actions {
   color: #fff;
 }
 
-/* line 175, ../../app/stylesheets/application.scss */
+/* line 191, ../../app/stylesheets/application.scss */
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;

@@ -48,13 +48,19 @@ class ConferencesController < ApplicationController
   
   def search
     @conference = Conference.new(params[:conference])
-    @conferences = Conference.query(
-      :term => @conference.name, 
-      :startdate => @conference.startdate,
-      :enddate => @conference.enddate,
-      :categories => @conference.categories,
-      :include_subcategories => params[:include_subcategories] == "1"
-    )
+    @empty_form = params[:commit].blank?
+    
+    unless @empty_form
+      @conferences = Conference.query(
+        :term => @conference.name, 
+        :startdate => @conference.startdate,
+        :enddate => @conference.enddate,
+        :categories => @conference.categories,
+        :include_subcategories => params[:include_subcategories] == "1"
+      )
+    else
+      @conferences = []
+    end
   end
   
   def update

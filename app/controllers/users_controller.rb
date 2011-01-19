@@ -6,7 +6,21 @@ class UsersController < ApplicationController
   before_filter :load_user, :only => [:show, :update]
   
   def show
-    render :json => @user.to_json
+    respond_to do |format|
+      format.html {  }
+      format.json { render :json => @user.to_json }
+    end
+  end
+  
+  def search
+    @user = User.new(params[:user])
+    @empty_form = params[:user].blank?
+    
+    unless @empty_form
+      @users = User.find_by_term(@user.username, current_user)
+    else
+      @users = []
+    end
   end
   
   def update

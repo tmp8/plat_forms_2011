@@ -28,9 +28,10 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username
 
   has_many :friendships
-  has_many :friends, :through => :friendships
+  has_many :friends, :through => :friendships, :conditions => {:friendships => {:status => Friendship::CONFIRMED }}
 
-  has_many :friendship_requests, :class_name => "Friendship", :foreign_key => "friend_id"    
+  has_many :friendship_requests, :class_name => "Friendship", :foreign_key => "user_id", :conditions => {:friendships => {:status => Friendship::OUTSTANDING }}
+  has_many :friendship_invitations, :class_name => "Friendship", :foreign_key => "friend_id", :conditions => {:friendships => {:status => Friendship::OUTSTANDING }}
   
   has_many :conference_participations
   has_many :conferences, :through => :conference_participations
@@ -40,11 +41,33 @@ class User < ActiveRecord::Base
   
   has_many :organizing_conferences, :class_name => "Conference", :foreign_key => :organizator_id
 
+  class << self
+    def find_by_term(term, current_user)
+      quoted_term = connection.quote("#{term}%")
+      find_by_sql(<<-EOT)
+      select 
+        u.*,
+        IF(ISNULL(f.friend_id), null, true) as is_friend
+      from 
+        users u 
+          left outer join friendships f on (f.friend_id = #{current_user.id} and u.id = f.user_id and f.status = 1)
+      group by 
+        u.id, f.friend_id
+      having
+        username like #{quoted_term} OR (is_friend AND full_name like #{quoted_term})
+      order by 
+        username
+      EOT
+    end
+  end
+
   def request_friendship(friend)
     self.friendships.create(:friend => friend)
   end
   
   def friend_state(other_user)
+    return IN_CONTACT if self == other_user
+    
     if friendships.confirmed.map(&:friend).include? other_user
       IN_CONTACT 
     elsif  friendships.outstanding.map(&:friend).include? other_user 
@@ -98,6 +121,10 @@ class User < ActiveRecord::Base
       write_attribute(:lng, nil)
     end
     write_attribute(:gps, gps)
+  end
+  
+  def to_param
+    username
   end
   
   protected
