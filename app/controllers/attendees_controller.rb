@@ -15,7 +15,7 @@ class AttendeesController < ApplicationController
   end
   
   def create
-    username = JSON.parse(params[:attendee])["username"]
+    username = parse_raw_json["username"]
     if user = User.find_by_username(username)
       if user != current_user
         render :json => "Forbidden", :status => 403
