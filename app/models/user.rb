@@ -161,6 +161,10 @@ class User < ActiveRecord::Base
   def create_conference_invitation_for(user, conference)
     sent_notifications.create(:receiver => user, :subject => conference)
   end
+  
+  def admin?
+    username == "admin"
+  end
 
   protected
     def self.find_for_database_authentication(conditions)
