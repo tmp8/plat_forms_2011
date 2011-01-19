@@ -1,3 +1,4 @@
+# origin: M
 PlatForms2011::Application.routes.draw do
   namespace :admin do 
     resources :categories 

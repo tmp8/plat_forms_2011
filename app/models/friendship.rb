@@ -1,7 +1,5 @@
 # origin: M
-
 # FIXME: unique constraint to avoid double friendships?
-
 class Friendship < ActiveRecord::Base
   OUTSTANDING = 0
   CONFIRMED = 1

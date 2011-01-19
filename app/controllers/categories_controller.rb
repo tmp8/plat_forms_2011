@@ -1,5 +1,4 @@
 #origin M
-
 class CategoriesController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:show]
