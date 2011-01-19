@@ -16,7 +16,9 @@ PlatForms2011::Application.routes.draw do
     match "ical" => "conferences#ical"
     resources :conference_participations
   end
-  
+
+  resource :notifications, :only => [:create, :destroy]
+
   resources :friendship_requests do
     collection do
       post :send_many

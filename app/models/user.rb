@@ -39,6 +39,9 @@ class User < ActiveRecord::Base
   has_many :series_contacts, :foreign_key => :contact_id
   has_many :series, :through => :series_contacts
   
+  has_many :sent_notifications, :class_name => 'Notification', :foreign_key => "user_id"
+  has_many :received_notifications, :class_name => 'Notification', :foreign_key => "receiver_id"
+  
   has_many :organizing_conferences, :class_name => "Conference", :foreign_key => :organizator_id
 
   class << self
@@ -151,6 +154,10 @@ class User < ActiveRecord::Base
     username
   end
   
+  def create_conference_invitation_for(user, conference)
+    sent_notifications.create(:receiver => user, :subject => conference)
+  end
+
   protected
     def self.find_for_database_authentication(conditions)
       login = conditions.delete(:login)
