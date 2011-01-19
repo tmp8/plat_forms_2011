@@ -5,7 +5,7 @@ class ConferencesControllerTest < ActionController::TestCase
   
   context "ical" do
     should "export conference as ical" do
-      sign_in(create_activated_user)
+      sign_in(Factory(:user))
       
       conference = Factory(:conference)
       get :ical, :conference_id => conference.id
@@ -18,7 +18,7 @@ class ConferencesControllerTest < ActionController::TestCase
     
     setup do
       Conference.delete_all
-      @user = create_activated_user
+      @user = Factory(:user)
       @conference_attributes = Factory.build(:conference).attributes
       login_with_basic_auth(@user)
     end

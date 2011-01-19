@@ -9,7 +9,7 @@ class UsersControllerTest < ActionController::TestCase
     
     setup do
       User.delete_all
-      @user = create_activated_user
+      @user = Factory(:user)
       @conference = Factory(:conference, :organizator => @user)
       login_with_basic_auth(@user)
     end
