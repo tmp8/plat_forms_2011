@@ -95,8 +95,5 @@ class ConferencesController < ApplicationController
         render :status => 501, :text => "Not Implemented" and return false
       end
     end
-    
-    def parse_raw_json
-      JSON.parse(CGI.unescape(request.raw_post))
-    end
+  
 end
