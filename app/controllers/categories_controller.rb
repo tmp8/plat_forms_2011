@@ -19,6 +19,12 @@ class CategoriesController < ApplicationController
     end
   end
   
+  def conferences
+    @category = Category.find(params[:id])
+    @conferences = @category.conferences
+    render :json => @conferences.to_json, :status => (@categories.blank? ? 204 : 200)
+  end
+  
   def create
     @category = Category.new(parse_raw_json)
     if @category.save

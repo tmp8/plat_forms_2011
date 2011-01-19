@@ -15,6 +15,35 @@ class CategoriesControllerTest < ActionController::TestCase
       login_with_basic_auth(@user)
     end
     
+    context "by category" do
+      setup do
+        @other_category = Factory(:category)
+        @conference, @other_conference = 2.times.map { Factory(:conference) }
+        @other_category.conferences << @other_conference
+        @category.conferences << @conference
+      end
+      
+      should "find conference for category" do
+        get :conferences, :id => @category.id
+        assert_response :success
+        conferences = JSON.parse(response.body)
+        assert_equal 1, conferences.size
+        assert_equal @conference.id, conferences.first["id"]
+      end
+      
+      should "find conference for category" do
+        @category.conferences.destroy_all
+        get :conferences, :id => @category.id
+        assert_response 204
+      end
+      
+      should "return 404" do
+        get :conferences, :id => 350923, :format => "json"
+        assert_response 404
+        assert_equal "application/json", response.content_type
+      end
+    end
+    
     context "index" do
       
       should "return categories" do

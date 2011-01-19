@@ -38,9 +38,13 @@ PlatForms2011::Application.routes.draw do
     resources :users, :path => "members", :only => [:create, :show, :update] do
       resources :contacts, :only => [:create, :index]
     end
-    resources :categories, :only => [:index, :show, :create]
+    resources :categories, :only => [:index, :show, :create] do
+      member do
+        get :conferences
+      end
+    end
     resources :series, :only => [:index, :show, :create]
-    match "/conferencesbycategory" => "categories#conferences"
+    match "/conferencesbycategory/:id" => "categories#conferences"
     match "/search" => "search#search"
     match "/reset" => "maintenance#reset"
     match "/factorydefaults" => "maintenance#factorydefaults"    
