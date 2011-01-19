@@ -16,4 +16,12 @@ class UserTest < ActiveSupport::TestCase
     should validate_presence_of(:country)
     should validate_uniqueness_of :username
   end
+  
+  context "query" do
+    should "find user by username or full_name if is contact" do
+    end
+
+    should "find user only by username if user is not contact" do
+    end
+  end
 end
