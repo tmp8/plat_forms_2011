@@ -22,4 +22,8 @@ class ApplicationController < ActionController::Base
       end
       return true
     end
+    
+    def parse_raw_json
+      JSON.parse(CGI.unescape(request.raw_post))
+    end
 end

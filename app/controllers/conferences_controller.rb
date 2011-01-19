@@ -23,7 +23,7 @@ class ConferencesController < ApplicationController
       format.html do
         @conference = current_user.organizing_conferences.build(params[:conference])
         if @conference.save
-          redirect_to(conferences_path(@conference), :notice => 'Conference was successfully created.')
+          redirect_to(conference_path(@conference), :notice => 'Conference was successfully created.')
         else
           render :action => "new" 
         end
@@ -46,13 +46,29 @@ class ConferencesController < ApplicationController
     end
   end
   
+  def search
+    @conference = Conference.new(params[:conference])
+    @conferences = Conference.query(
+      :term => @conference.name, 
+      :startdate => @conference.startdate,
+      :enddate => @conference.enddate
+    )
+  end
+  
   def update
     @conference = current_user.organizing_conferences.find(params[:id]) 
     @conference.attributes = params[:conference] || parse_raw_json
-    if @conference.save
-      respond_to do |format|
-        format.html { }
-        format.json { render :json => @conference.to_json }
+    respond_to do |format|
+      format.json do
+        if @conference.save
+          render :json => @conference.to_json
+        end
+      end
+    
+      format.html do
+        if @conference.save
+          redirect_to(conference_path(@conference), :notice => 'Conference was successfully updated.')
+        end
       end
     end
   end
@@ -86,8 +102,5 @@ class ConferencesController < ApplicationController
         render :status => 501, :text => "Not Implemented" and return false
       end
     end
-    
-    def parse_raw_json
-      JSON.parse(CGI.unescape(request.raw_post))
-    end
+  
 end

@@ -1,0 +1,14 @@
+= simple_form_for(@conference, :url => search_conferences_path) do |f|
+  .inputs
+    = f.input :name
+    = f.input :startdate, :include_blank => true
+    = f.input :enddate, :include_blank => true
+
+  .actions
+    = f.submit :submit
+    
+%ul.links
+  - for conference in @conferences
+    %li= conference_link(conference)
+
+
