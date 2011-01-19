@@ -29,7 +29,7 @@ td {
   padding: 0em 1em 0em 0em;
 }
 
-input.make_friends {
+input.make_friends, input.invite_friends_to_conference {
   margin-top: 2em;
 }
 
@@ -41,6 +41,7 @@ p.subline {
   font-family: "Adobe Caslon Pro", "Hoefler Text", Georgia, Garamond, Times, serif;
   font-style: italic;
   color: #424242;
+  margin-top: -1em;
 }
 
 legend {
@@ -107,6 +108,11 @@ ul.navigation {
 .alert {
   background-color: #ee5b54;
   color: #000;
+}
+
+span.checkbox {
+  float: left;
+  width: 20px; 
 }
 
 /* divs */
