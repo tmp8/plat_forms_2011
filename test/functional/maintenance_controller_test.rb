@@ -6,6 +6,7 @@ class MaintenanceControllerTest < ActionController::TestCase
   
   context "admin" do
     setup do
+      User.delete_all
       @user = Factory(:admin)
       login_with_basic_auth(@user, "admin")
     end
