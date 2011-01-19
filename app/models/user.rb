@@ -138,6 +138,10 @@ class User < ActiveRecord::Base
     conference_participations.detect { |cp| cp.conference == conference }
   end
 
+  def has_invitation_for(conference)
+    received_notifications.detect { |notification| notification.subject == conference }
+  end
+  
   def gps=(gps)
     unless gps.blank?
       lat, lng = GPS.lat_lng_from_string(gps)
