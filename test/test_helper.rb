@@ -78,4 +78,8 @@ class ActiveSupport::TestCase
       @request.env.delete('RAW_POST_DATA')
       response
     end
+
+  	def login_with_basic_auth(user, password = "123456")
+      @request.env['HTTP_AUTHORIZATION'] = encode_credentials(user.username, password)
+  	end
 end
