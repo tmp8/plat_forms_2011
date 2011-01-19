@@ -23,6 +23,9 @@ class FriendshipTest < ActiveSupport::TestCase
     assert_equal 1, @user.friendship_requests.size
     assert_equal 1, @friend.friendship_invitations.size
 
+    assert_equal [], @user.friends
+    assert_equal [], @friend.friends
+    
     @friend.friendship_invitations.first.confirm!
     
     @friend.reload
@@ -37,6 +40,7 @@ class FriendshipTest < ActiveSupport::TestCase
     assert_equal [@friend], @user.friends
     assert_equal [@user], @friend.friends
   end
+
   
   should "not create new outstandig requests if exists or blocked"
 

@@ -79,6 +79,30 @@ class User < ActiveRecord::Base
     end
   end
   
+  def full_friendships(current_user)
+    if self == current_user
+      friends + friendship_invitations.outstanding.map(&:user) + friendship_requests.outstanding.map(&:friend)
+    else
+      friends
+    end
+  end
+
+  def process_friendship_request(other_user, params)
+    if friendship_request = friendship_invitations.outstanding.where(:friendships => {:user_id => other_user.id } ).first
+      params["positive"] ? friendship_request.confirm! : friendship_request.reject!
+    elsif params["positive"] && !in_contact?(other_user)
+      request_friendship(other_user)
+    end
+  end
+
+  def friends?(other_user)
+    friend_state(other_user) == IN_CONTACT
+  end
+  
+  def in_contact?(other_user)
+    friend_state(other_user) != NO_CONTACT
+  end
+  
   def attend!(conference)
     conference_participations.create!(:conference => conference)
   rescue ActiveRecord::RecordNotUnique => e
