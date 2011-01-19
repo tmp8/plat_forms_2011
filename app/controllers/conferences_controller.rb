@@ -58,10 +58,17 @@ class ConferencesController < ApplicationController
   def update
     @conference = current_user.organizing_conferences.find(params[:id]) 
     @conference.attributes = params[:conference] || parse_raw_json
-    if @conference.save
-      respond_to do |format|
-        format.html { }
-        format.json { render :json => @conference.to_json }
+    respond_to do |format|
+      format.json do
+        if @conference.save
+          render :json => @conference.to_json
+        end
+      end
+    
+      format.html do
+        if @conference.save
+          redirect_to(conference_path(@conference), :notice => 'Conference was successfully updated.')
+        end
       end
     end
   end
