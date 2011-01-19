@@ -46,6 +46,8 @@ class User < ActiveRecord::Base
   end
   
   def friend_state(other_user)
+    return IN_CONTACT if self == other_user
+    
     if friendships.confirmed.map(&:friend).include? other_user
       IN_CONTACT 
     elsif  friendships.outstanding.map(&:friend).include? other_user 
