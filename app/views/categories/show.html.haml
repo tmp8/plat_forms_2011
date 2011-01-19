@@ -1,0 +1,11 @@
+%h1= @category.name
+
+%h2 Sub categories
+%ul.list
+  - for category in @category.sub_categories
+    = render :partial => 'categories/category_node', :locals => {:category => category}
+
+%h2 Conferences in this category
+%ul
+  - for conference in @category.conferences
+    %li= conference_link(conference)

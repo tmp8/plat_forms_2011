@@ -8,7 +8,10 @@ gem "haml-rails"
 gem "compass"
 gem "hoptoad_notifier", "~> 2.3"
 gem "devise"
-gem "simple_form"  
+gem "simple_form"
+gem "geokit"
+gem "sunspot_rails", '1.2.rc4'
+gem "icalendar"
 
 group :development do
   gem "capistrano"

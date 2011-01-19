@@ -1,0 +1,37 @@
+%h1
+  Hello
+  = (current_user && current_user.full_name) || 'Dude'
+%h2 What ca I do here
+%ul.links
+  - if current_user
+    %li= link_to "Add a conference", new_conference_path
+#hello
+
+  #categories
+    %h2 Conference categories
+    %ul.list
+      - for category in @categories
+        = render :partial => 'categories/category_node', :locals => {:category => category}
+        
+  #running
+    %h2 Running conferences
+    - if @running_conferences.empty?
+      %p.warn There are no conferences running at the moment.
+    %ul.links
+      - for conference in @running_conferences
+        %li= conference_link(conference)
+        
+  #starting_tomorrow
+    %h2 Tomorrows starting conferences
+    - if @tomorrows_conferences.empty?
+      %p.warn There are no conferences starting tomorrow.
+    %ul.links
+      - for conference in @tomorrows_conferences
+        %li= conference_link(conference)
+  
+  #conferences
+    %h2 All conferences
+    %ul.links
+      - for conference in @conferences
+        %li= conference_link(conference)
+
