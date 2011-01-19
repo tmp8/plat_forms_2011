@@ -1,13 +1,9 @@
 module ConferencesHelper
   def attend_or_unattend_button
-    if current_user 
-      if participation = current_user.participation_for(@conference)
-        button_to("Won't attend!!", conference_conference_participation_path(@conference, participation), :method => :delete)
-      else
-        button_to("Attend!", conference_conference_participations_path(@conference), :method => :post)
-      end
+    if participation = current_user.participation_for(@conference)
+      button_to("Won't attend!!", conference_conference_participation_path(@conference, participation), :method => :delete)
     else
-      # FIXME: go through sing-in / up and participate
+      button_to("Attend!", conference_conference_participations_path(@conference), :method => :post)
     end
   end
   
