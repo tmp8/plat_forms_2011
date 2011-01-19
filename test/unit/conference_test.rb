@@ -74,12 +74,22 @@ class ConferenceTest < ActiveSupport::TestCase
         [Date.new(2011,6,2)].each do |startdate|
           assert_equal [], Conference.query(:startdate => startdate)
         end
-        
-        # 
-        # 
-        # 
-        # assert_equal [one, two], Conference.query(:startdate => Date.new(2010,5,21))
-        # assert_equal [one], Conference.query(:startdate => Date.new(2010,5,21), :enddate => Date.new(2010,6,21))
+
+        [Date.new(2011,6,2)].each do |enddate|
+          assert_equal [c09, c10, c11], Conference.query(:enddate => enddate)
+        end
+
+        [Date.new(2011,5,21)].each do |enddate|
+          assert_equal [c09, c10], Conference.query(:enddate => enddate)
+        end
+
+        [Date.new(2010,5,21)].each do |enddate|
+          assert_equal [c09], Conference.query(:enddate => enddate)
+        end
+
+        [Date.new(2000,5,21)].each do |enddate|
+          assert_equal [], Conference.query(:enddate => enddate)
+        end
       end
     end
     
