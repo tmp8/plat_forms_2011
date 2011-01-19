@@ -46,6 +46,15 @@ class ConferencesController < ApplicationController
     end
   end
   
+  def search
+    @conference = Conference.new(params[:conference])
+    @conferences = Conference.query(
+      :term => @conference.name, 
+      :startdate => @conference.startdate,
+      :enddate => @conference.enddate
+    )
+  end
+  
   def update
     @conference = current_user.organizing_conferences.find(params[:id]) 
     @conference.attributes = params[:conference] || parse_raw_json

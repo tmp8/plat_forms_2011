@@ -3,6 +3,10 @@ PlatForms2011::Application.routes.draw do
   
   resources :conferences do
     match "ical" => 'conferences#ical'
+    collection do 
+      get :search
+      post :search
+    end
     resources :conference_participations
   end
   
