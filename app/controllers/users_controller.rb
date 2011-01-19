@@ -21,7 +21,6 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(parse_raw_json)
-    @user.skip_confirmation!
     if @user.save
       render :json => @user.to_json
     else

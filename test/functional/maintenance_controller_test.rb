@@ -6,7 +6,7 @@ class MaintenanceControllerTest < ActionController::TestCase
   
   context "admin" do
     setup do
-      @user = create_admin_user
+      @user = Factory(:admin)
       login_with_basic_auth(@user, "admin")
     end
   
@@ -31,7 +31,7 @@ class MaintenanceControllerTest < ActionController::TestCase
   
   context "not admin user" do
     setup do
-      @user = create_activated_user # not admin
+      @user = Factory(:user) # not admin
       login_with_basic_auth(@user)
       
       dont_allow(Factorydefaults).new

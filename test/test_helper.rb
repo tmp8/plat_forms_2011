@@ -52,22 +52,7 @@ class ActiveSupport::TestCase
   end
   
   protected
-    def create_activated_user
-      user = Factory.build(:user)
-      user.skip_confirmation!
-      user.save!
-      user
-    end
-  
-    def create_admin_user
-      user = Factory.build(:admin)
-      user.skip_confirmation!
-      user.save!
-      user
-    end
-  
     # verbatim, from ActiveController's own unit tests
-
     def encode_credentials(username, password)
       "Basic #{ActiveSupport::Base64.encode64("#{username}:#{password}")}"
     end

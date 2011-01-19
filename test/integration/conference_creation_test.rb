@@ -4,8 +4,6 @@ require 'integration_test_helper'
 class ConferenceCreationTest < ActionDispatch::IntegrationTest
   background do 
     @user = Factory(:user)
-    @user.skip_confirmation!
-    @user.save!
   end
   
   setup do

@@ -38,7 +38,6 @@ class Factorydefaults
         country: 'Germany',
         email: 'dev@tmp8.de'
       )
-      user.skip_confirmation!
       user.save!
     end
     
@@ -94,7 +93,6 @@ class Factorydefaults
           country: user_data['country'],
           gps: user_data['gps']
         )
-        user.skip_confirmation!
         user.save!
       end
     end
