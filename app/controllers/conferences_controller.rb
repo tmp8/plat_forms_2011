@@ -51,7 +51,9 @@ class ConferencesController < ApplicationController
     @conferences = Conference.query(
       :term => @conference.name, 
       :startdate => @conference.startdate,
-      :enddate => @conference.enddate
+      :enddate => @conference.enddate,
+      :categories => @conference.categories,
+      :include_subcategories => params[:include_subcategories] == "1"
     )
   end
   
