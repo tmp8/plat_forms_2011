@@ -2,11 +2,11 @@ PlatForms2011::Application.routes.draw do
   devise_for :users
   
   resources :conferences do
-    match "ical" => 'conferences#ical'
     collection do 
       get :search
       post :search
     end
+    match "ical" => "conferences#ical"
     resources :conference_participations
   end
   

@@ -33,6 +33,7 @@
   (
   = link_to @conference.creator.email, "mailto:#{@conference.creator.email}"
   )
+  = edit_link_if_creator(current_user)
 
 %h2 Attendees
 - unless @conference.participants.empty?
@@ -41,4 +42,7 @@
       %li= user_info(perticipant)
 - else
   %p.warn No attendees so far
-= attend_or_unattend_button
+%p= attend_or_unattend_button
+
+%h2 Categories
+%p= @conference.categories.map(&:name).join(', ')

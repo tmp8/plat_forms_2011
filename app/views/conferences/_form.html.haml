@@ -18,7 +18,7 @@
       = f.input :location
 
       = f.input :gps
-      =# f.association :series
+      = f.association :categories, :collection => Category.root.all.map(&:self_with_ancestors).flatten
       = f.input :venue
       = f.input :accomodation
       = f.input :howtofind

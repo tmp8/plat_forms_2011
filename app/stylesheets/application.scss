@@ -1,14 +1,13 @@
 h1 {
-  margin: 0.3em 0 1em 0;
+  margin: 0.3em 0 0.5em 0;
   
   font-family: times, Times New Roman, times-roman, georgia, serif;
-  color: #444;
-  margin: 0;
-  padding: 0px 0px 6px 0px;
-  font-size: 51px;
-  line-height: 44px;
-  letter-spacing: -2px;
-  font-weight: bold;
+  font-size: 48px;
+  line-height: 40px;
+  letter-spacing: -1px;
+  color: #484;
+  padding: 0 0 0 0;
+  font-weight: 100;
 }
 
 h2 {
@@ -30,6 +29,17 @@ p.subline {
   font-family: "Adobe Caslon Pro", "Hoefler Text", Georgia, Garamond, Times, serif;
   font-style: italic;
   color: #424242;
+}
+
+legend {
+  padding: 2em 0em 1em 0em;
+  
+  font-family: Gill Sans, Verdana;
+  font-size: 11px;
+  line-height: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
 }
 
 ul.list {
@@ -82,7 +92,7 @@ ul.navigation {
 /* divs */
 
 #navigation {
-  margin: 1em;
+  margin: 1em 1em 3em 1em;
 }
 
 #content {
@@ -109,4 +119,58 @@ ul.navigation {
 .simple_form div.boolean label {  
   float: none;  
   margin: 0;  
+}
+
+/* scaffold css */
+
+body { background-color: #fff; color: #333; }
+
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+  line-height: 18px;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a { color: #000; }
+a:visited { color: #666; }
+
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
 }
