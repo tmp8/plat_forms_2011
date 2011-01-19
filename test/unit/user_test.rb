@@ -18,10 +18,24 @@ class UserTest < ActiveSupport::TestCase
   end
   
   context "query" do
-    should "find user by username or full_name if is contact" do
+    background do 
+      @admin = Factory(:user, :username => "admin", :full_name => "root")
+      @thies = Factory(:user, :username => "thies", :full_name => "joshua arntzen")
+      @lurker = Factory(:user)
+      @admin.request_friendship(@thies).confirm!
+    end
+    
+    should "find user by full_name if friend" do
+      assert_equal [@thies], User.find_by_term("joshua", @admin)
     end
 
-    should "find user only by username if user is not contact" do
+    should "not find user by full_name if NOT friend" do
+      assert_equal [], User.find_by_term("joshua", @lurker)
+    end
+
+    should "find user by username " do
+      assert_equal [@thies], User.find_by_term("thies", @admin)
+      assert_equal [@thies], User.find_by_term("thies", @lurker)
     end
   end
 end

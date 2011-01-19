@@ -17,13 +17,7 @@ class UsersController < ApplicationController
     @empty_form = params[:user].blank?
     
     unless @empty_form
-      @users = User.all.sort_by(&:username)
-        # :term => @conference.name, 
-        # :startdate => @conference.startdate,
-        # :enddate => @conference.enddate,
-        # :categories => @conference.categories,
-        # :include_subcategories => params[:include_subcategories] == "1"
-#      )
+      @users = User.find_by_term(@user.username, current_user)
     else
       @users = []
     end

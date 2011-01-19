@@ -41,6 +41,26 @@ class User < ActiveRecord::Base
   
   has_many :organizing_conferences, :class_name => "Conference", :foreign_key => :organizator_id
 
+  class << self
+    def find_by_term(term, current_user)
+      quoted_term = connection.quote("#{term}%")
+      find_by_sql(<<-EOT)
+      select 
+        u.*,
+        IF(ISNULL(f.friend_id), null, true) as is_friend
+      from 
+        users u 
+          left outer join friendships f on (f.friend_id = #{current_user.id} and u.id = f.user_id and f.status = 1)
+      group by 
+        u.id, f.friend_id
+      having
+        username like #{quoted_term} OR (is_friend AND full_name like #{quoted_term})
+      order by 
+        username
+      EOT
+    end
+  end
+
   def request_friendship(friend)
     self.friendships.create(:friend => friend)
   end
