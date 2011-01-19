@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   has_many :series, :through => :series_contacts
   
   has_many :sent_notifications, :class_name => 'Notification', :foreign_key => "user_id"
-  has_many :received_notifications, :class_name => 'Notification', :foreign_key => "receiver_id"
+  has_many :received_notifications, :class_name => 'Notification', :foreign_key => "receiver_id", :order => 'updated_at DESC'
   
   has_many :organizing_conferences, :class_name => "Conference", :foreign_key => :organizator_id
 
@@ -160,6 +160,10 @@ class User < ActiveRecord::Base
   
   def create_conference_invitation_for(user, conference)
     sent_notifications.create(:receiver => user, :subject => conference)
+  end
+  
+  def admin?
+    username == "admin"
   end
 
   protected
