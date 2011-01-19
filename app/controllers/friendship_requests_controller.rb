@@ -12,4 +12,10 @@ class FriendshipRequestsController < ApplicationController
     end
     redirect_to :back, :notice => "Friendship request sent to #{friends.map(&:username).join(', ')}!"
   end
+  
+  def confirm
+    friendship = current_user.friendship_invitations.find(params[:id])
+    friendship.confirm!
+    redirect_to :back, :notice => "Friendship to #{friendship.user.full_name} confirmed!"
+  end
 end

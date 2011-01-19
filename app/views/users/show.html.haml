@@ -35,15 +35,15 @@
     Uhh? You have no friends here!
     = link_to 'Make some', search_users_path
 - else
-  %ul
+  %ul.links
     - for friend in @user.friends
       %li= user_info(friend)
       
 %h2 Friendship request
 - if @user.friendship_requests.empty?
-  %p.warn No friendship reqúests.
+  %p.warn No outstanding friendship requests.
 - else
-  %ul.list
+  %ul.links
     - for friend in @user.friendship_requests.map(&:friend)
       %li= user_info(friend)
       
@@ -51,6 +51,8 @@
 - if @user.friendship_invitations.empty?
   %p.warn No friendship invitations.
 - else
-  %ul.list
-    - for friend in @user.friendship_invitations.map(&:user)
-      %li= user_info(friend)
+  %ul.links
+    - for friendship in @user.friendship_invitations
+      %li
+        = friendship.user.full_name
+        = button_to 'Confirm!', confirm_friendship_request_path(friendship), :class => 'confirm_friendship'

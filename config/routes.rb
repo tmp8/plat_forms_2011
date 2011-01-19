@@ -21,6 +21,9 @@ PlatForms2011::Application.routes.draw do
     collection do
       post :send_many
     end
+    member do
+      post 'confirm'
+    end
   end
   
   resources :categories, :only => [:show]

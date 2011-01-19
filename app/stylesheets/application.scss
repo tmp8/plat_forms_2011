@@ -50,6 +50,14 @@ legend {
   font-weight: bold;
 }
 
+form {
+  display: inline;
+}
+
+form.button_to div {
+  display: inline;
+}
+
 ul.list {
   margin-bottom: 2em;
   
