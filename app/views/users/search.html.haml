@@ -12,15 +12,15 @@
 - if !@empty_form
   %h2 Results
   - if @users.empty?
-    %p.warn No results. Sorry :,(
+    %p.warn No users found.
   - else
-    %ul.links
-      = form_tag send_many_friendship_requests_path do |f|
-        - for user in @users
-          %li
-            - if current_user && (current_user.friend_state(user) == User::NO_CONTACT)
-              = check_box_tag "user[#{user.id}]", 1
-            = link_to user_info(user), user
-            = "from #{user.city}/#{user.country_code}"
-        - if current_user
-          = submit_tag "Send friendship Request"
+    = form_tag send_many_friendship_requests_path do |f|
+      %ul
+      - for user in @users
+        %li
+          - if current_user && (current_user.friend_state(user) == User::NO_CONTACT)
+            = check_box_tag "user[#{user.id}]", 1
+          = link_to user_info(user), user
+          = "( #{user.city}, #{user.country} )"
+      - if current_user
+        = submit_tag "Make friends!"

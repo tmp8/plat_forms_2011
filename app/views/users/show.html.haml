@@ -33,24 +33,24 @@
 - if @user.friends.empty?
   %p.warn
     Uhh? You have no friends here!
-    = link_to 'Make some', '#' #search_user_path
+    = link_to 'Make some', search_users_path
 - else
   %ul
     - for friend in @user.friends
       %li= user_info(friend)
       
 %h2 Friendship request
-- if @user.friendship_requests.outstanding.empty?
+- if @user.friendship_requests.empty?
   %p.warn No friendship reqúests.
 - else
-  %ul
-    - for friend in @user.friendship_requests.outstanding
+  %ul.list
+    - for friend in @user.friendship_requests.map(&:friend)
       %li= user_info(friend)
       
 %h2 Friendship invitations
 - if @user.friendship_invitations.empty?
-  %p.warn No friendship invittions.
+  %p.warn No friendship invitations.
 - else
-  %ul
-    - for friend in @user.outstanding
+  %ul.list
+    - for friend in @user.friendship_invitations.map(&:user)
       %li= user_info(friend)
