@@ -15,8 +15,11 @@
       %ul
       - for user in @users
         %li
-          - if !current_user.friends_with?(user) && !current_user.friendship_requests.map(&:friend).include?(user)
-            = check_box_tag "user[#{user.id}]", 1
+          %span.checkbox
+            - if !current_user.friends_with?(user) && !current_user.friendship_requests.map(&:friend).include?(user)
+              = check_box_tag "user[#{user.id}]", 1
+            - else
+              &nbsp;
           = link_to user_info(user), user
           = "( #{user.city}, #{user.country} )"
       = submit_tag "Make friends!", :class => 'make_friends'
