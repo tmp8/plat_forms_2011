@@ -1,8 +1,9 @@
 %h1
   Hello
   = (current_user && current_user.full_name) || 'Dude'
-%h2 What ca I do here
+%h2 What can I do here?
 %ul.links
+  %li= link_to "Search for conferences", search_conferences_path
   - if current_user
     %li= link_to "Add a conference", new_conference_path
 #hello

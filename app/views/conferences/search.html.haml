@@ -1,4 +1,5 @@
-= simple_form_for(@conference, :url => search_conferences_path) do |f|
+%h1 Search for a conference
+= simple_form_for(@conference, :url => search_conferences_path, :html => {:method => :get}) do |f|
   .inputs
     = f.input :name
     = f.input :startdate, :include_blank => true
@@ -9,9 +10,12 @@
 
   .actions
     = f.submit :submit
-    
-%ul.links
-  - for conference in @conferences
-    %li= conference_link(conference)
-
-
+%p
+- if !@empty_form
+  %h2 Results
+  - if @conferences.empty?
+    %p.warn No results. Sorry :,(
+  - else
+    %ul.links
+      - for conference in @conferences
+        %li= conference_link(conference)
