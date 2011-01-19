@@ -1,3 +1,5 @@
+#origin M
+
 class CategoriesController < ApplicationController
 
   def index

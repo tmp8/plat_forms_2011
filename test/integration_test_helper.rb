@@ -10,7 +10,6 @@ def sign_in(user)
   
   fill_in 'Login', :with => user.username
   fill_in 'Password', :with => "123456"
-  
   click_link_or_button('user_submit')
 end
 

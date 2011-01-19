@@ -1,3 +1,5 @@
+#origin: M
+
 class UsersController < ApplicationController
   def index
     render :status => 501, :text => "Not Implemented"
