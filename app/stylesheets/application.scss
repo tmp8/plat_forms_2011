@@ -29,6 +29,10 @@ td {
   padding: 0em 1em 0em 0em;
 }
 
+input.make_friends {
+  margin-top: 2em;
+}
+
 p {
   margin-bottom: 2em;
 }
@@ -114,7 +118,18 @@ ul.navigation {
 }
 
 #content {
-  margin: 2em;
+  margin: 2em 2em 4em 2em;
+}
+
+#footer {
+  background-color: #fff;
+  position:fixed;
+  bottom: 0px;
+  width: 100%;
+  padding: 0.3em;
+  font-size: 0.7em;
+  font-color: #999;
+  text-align: right;
 }
 
 /* Some default Styles for Simple-Form */
@@ -139,6 +154,9 @@ ul.navigation {
   margin: 0;  
 }
 
+.actions {
+  clear: both;
+}
 /* scaffold css */
 
 body { background-color: #fff; color: #333; }
@@ -162,10 +180,13 @@ div.field, div.actions {
   margin-bottom: 10px;
 }
 
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
+.field_with_errors input {
+  margin-right: 1em;
+  border: 1px solid red;
+}
+
+span.error {
+  color: red;
 }
 
 #error_explanation {

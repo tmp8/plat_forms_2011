@@ -18,4 +18,10 @@ class FriendshipRequestsController < ApplicationController
     friendship.confirm!
     redirect_to :back, :notice => "Friendship to #{friendship.user.full_name} confirmed!"
   end
+  
+  def reject
+    friendship = current_user.friendship_invitations.find(params[:id])
+    friendship.reject!
+    redirect_to :back, :notice => "Friendship to #{friendship.user.full_name} rejected!"
+  end
 end

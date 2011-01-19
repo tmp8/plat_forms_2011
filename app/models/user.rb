@@ -97,15 +97,15 @@ class User < ActiveRecord::Base
       request_friendship(other_user)
     end
   end
-
-  def friends?(other_user)
-    friend_state(other_user) == IN_CONTACT
-  end
   
   def in_contact?(other_user)
     friend_state(other_user) != NO_CONTACT
   end
   
+  def friends_with?(other_user)
+    friend_state(other_user) == IN_CONTACT
+  end
+
   def attend!(conference)
     conference_participations.create!(:conference => conference)
   rescue ActiveRecord::RecordNotUnique => e

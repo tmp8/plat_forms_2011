@@ -9,7 +9,7 @@
     = check_box_tag 'include_subcategories', 1, params['include_subcategories']
 
   .actions
-    = f.submit :submit
+    = f.submit 'Search'
 %p
 - if !@empty_form
   %h2 Results
