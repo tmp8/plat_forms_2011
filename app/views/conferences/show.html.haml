@@ -41,4 +41,7 @@
       %li= user_info(perticipant)
 - else
   %p.warn No attendees so far
-= attend_or_unattend_button
+%p= attend_or_unattend_button
+
+%h2 Categories
+%p= @conference.categories.map(&:name).join(', ')

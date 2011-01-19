@@ -17,7 +17,7 @@
       = link_to image_tag('cap.png', :alt => 'CaP'), root_path
       %ul.navigation
         - if current_user
-          %li= link_to "Add conference", new_conference_path
+          %li= link_to "Add conference", new_conference_path, :id => 'add_conference'
           %li= link_to "Sign out", destroy_user_session_path
         - else
           %li= link_to "Sign in", new_user_session_path

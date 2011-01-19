@@ -23,7 +23,7 @@ class ConferencesController < ApplicationController
       format.html do
         @conference = current_user.organizing_conferences.build(params[:conference])
         if @conference.save
-          redirect_to(conferences_path(@conference), :notice => 'Conference was successfully created.')
+          redirect_to(conference_path(@conference), :notice => 'Conference was successfully created.')
         else
           render :action => "new" 
         end
