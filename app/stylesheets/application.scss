@@ -10,7 +10,7 @@ h1 {
   font-weight: 100;
 }
 
-h2 {
+h2, th {
   margin: 0.3em 0 0.7em 0;
   
   font-family: Gill Sans, Verdana;
@@ -179,8 +179,8 @@ pre {
   font-size: 11px;
 }
 
-a { color: #000; }
-a:visited { color: #666; }
+a { color: #444; }
+a:visited { color: #444; }
 
 div.field, div.actions {
   margin-bottom: 10px;

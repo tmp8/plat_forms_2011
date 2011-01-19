@@ -4,14 +4,13 @@
   %tr
     %th Name
     %th Parent
-    %th
 
   - @categories.each do |admin_category|
     %tr
       %td= admin_category.name
-      %td= admin_category.parent_id
-      %td= link_to 'Edit', edit_admin_category_path(admin_category)
+      %td= admin_category.parent.try(:name)
+      %td= button_to 'Edit', edit_admin_category_path(admin_category), :method => :get
 
 %br
 
-= link_to 'New Category', new_admin_category_path
+= button_to 'Add category', new_admin_category_path, :method => :get
