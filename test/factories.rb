@@ -38,3 +38,10 @@ end
 Factory.define :category do |f|
   f.name { Faker::Name.name }
 end
+
+Factory.define :notification do |f|
+  f.association :user
+  f.receiver { Factory(:user) }
+  f.subject { Factory(:conference) }
+end
+
