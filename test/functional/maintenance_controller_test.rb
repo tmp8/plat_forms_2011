@@ -7,7 +7,7 @@ class MaintenanceControllerTest < ActionController::TestCase
   context "admin" do
     setup do
       @user = create_admin_user
-      @request.env['HTTP_AUTHORIZATION'] = encode_credentials(@user.username, "admin")
+      login_with_basic_auth(@user, "admin")
     end
   
     should "reset portal" do
@@ -32,7 +32,7 @@ class MaintenanceControllerTest < ActionController::TestCase
   context "not admin user" do
     setup do
       @user = create_activated_user # not admin
-      @request.env['HTTP_AUTHORIZATION'] = encode_credentials(@user.username, "123456")
+      login_with_basic_auth(@user)
       
       dont_allow(Factorydefaults).new
     end

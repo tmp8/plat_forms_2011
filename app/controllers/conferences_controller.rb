@@ -9,7 +9,7 @@ class ConferencesController < ApplicationController
       
       format.json do
         begin
-          @conference = current_user.organizing_conferences.build_from_json(request.raw_post, current_user)
+          @conference = current_user.organizing_conferences.build_from_json(parse_raw_json, current_user)
           if @conference.save
             render :json => @conference.to_json 
           else
@@ -48,7 +48,7 @@ class ConferencesController < ApplicationController
   
   def update
     @conference = current_user.organizing_conferences.find(params[:id]) 
-    @conference.attributes = params[:conference] || JSON.parse(CGI.unescape(request.raw_post))
+    @conference.attributes = params[:conference] || parse_raw_json
     if @conference.save
       respond_to do |format|
         format.html { }
@@ -85,5 +85,9 @@ class ConferencesController < ApplicationController
       if params[:format] == 'json'
         render :status => 501, :text => "Not Implemented" and return false
       end
+    end
+    
+    def parse_raw_json
+      JSON.parse(CGI.unescape(request.raw_post))
     end
 end
