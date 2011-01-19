@@ -11,7 +11,7 @@ h1 {
 }
 
 /* line 13, ../../app/stylesheets/application.scss */
-h2 {
+h2, th {
   margin: 0.3em 0 0.7em 0;
   font-family: Gill Sans, Verdana;
   font-size: 11px;
@@ -208,12 +208,12 @@ pre {
 
 /* line 182, ../../app/stylesheets/application.scss */
 a {
-  color: #000;
+  color: #444;
 }
 
 /* line 183, ../../app/stylesheets/application.scss */
 a:visited {
-  color: #666;
+  color: #444;
 }
 
 /* line 185, ../../app/stylesheets/application.scss */
