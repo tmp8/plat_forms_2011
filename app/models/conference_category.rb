@@ -1,5 +1,4 @@
 #origin: M
-
 class ConferenceCategory < ActiveRecord::Base
   after_save :touch_conference
   

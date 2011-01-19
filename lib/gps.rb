@@ -1,3 +1,4 @@
+# origin: M
 module GPS
   
   def lat_lng_from_string(string)

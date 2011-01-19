@@ -1,5 +1,4 @@
 #origin M
-
 class AttendeesController < ApplicationController
   
   before_filter :authenticate_user!

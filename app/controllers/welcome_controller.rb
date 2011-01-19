@@ -1,5 +1,4 @@
 # origin: M
-
 class WelcomeController < ApplicationController
   
   def hello

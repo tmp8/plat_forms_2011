@@ -1,5 +1,4 @@
 # origin: M
-
 class ConferenceParticipationsController < ApplicationController
   before_filter :authenticate_user!, :only => [:create, :destroy]
   before_filter :load_conference

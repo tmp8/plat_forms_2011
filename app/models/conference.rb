@@ -1,6 +1,4 @@
 # origin: M
-
-
 class Date
   def to_i
     to_s(:db).gsub("-", '').to_i
