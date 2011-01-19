@@ -1,7 +1,5 @@
 # origin: GM
-
 class User < ActiveRecord::Base
-
 
   NO_CONTACT = 0
   RCD_SENT = 1
@@ -12,7 +10,7 @@ class User < ActiveRecord::Base
   
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
@@ -40,7 +38,7 @@ class User < ActiveRecord::Base
   has_many :series, :through => :series_contacts
   
   has_many :sent_notifications, :class_name => 'Notification', :foreign_key => "user_id"
-  has_many :received_notifications, :class_name => 'Notification', :foreign_key => "receiver_id"
+  has_many :received_notifications, :class_name => 'Notification', :foreign_key => "receiver_id", :order => 'updated_at DESC'
   
   has_many :organizing_conferences, :class_name => "Conference", :foreign_key => :organizator_id
 
@@ -160,6 +158,10 @@ class User < ActiveRecord::Base
   
   def create_conference_invitation_for(user, conference)
     sent_notifications.create(:receiver => user, :subject => conference)
+  end
+  
+  def admin?
+    username == "admin"
   end
 
   protected

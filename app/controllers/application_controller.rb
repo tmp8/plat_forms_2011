@@ -1,5 +1,4 @@
 # origin: M
-
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
@@ -16,7 +15,7 @@ class ApplicationController < ActionController::Base
     end
     
     def ensure_admin!
-      if current_user.username != 'admin'
+      unless current_user.admin?
         render :status => 403, :nothing => true
         return false
       end

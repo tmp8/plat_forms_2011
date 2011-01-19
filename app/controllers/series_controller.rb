@@ -1,5 +1,4 @@
 #origin: M
-
 class SeriesController < ApplicationController
   
   before_filter :authenticate_user!, :only => [:create]

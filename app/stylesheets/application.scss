@@ -1,3 +1,4 @@
+/* origin: M */
 h1 {
   margin: 0.3em 0 0.5em 0;
   
@@ -10,7 +11,7 @@ h1 {
   font-weight: 100;
 }
 
-h2 {
+h2, th {
   margin: 0.3em 0 0.7em 0;
   
   font-family: Gill Sans, Verdana;
@@ -29,7 +30,7 @@ td {
   padding: 0em 1em 0em 0em;
 }
 
-input.make_friends {
+input.make_friends, input.invite_friends_to_conference {
   margin-top: 2em;
 }
 
@@ -41,6 +42,7 @@ p.subline {
   font-family: "Adobe Caslon Pro", "Hoefler Text", Georgia, Garamond, Times, serif;
   font-style: italic;
   color: #424242;
+  margin-top: -1em;
 }
 
 legend {
@@ -109,6 +111,15 @@ ul.navigation {
   color: #000;
 }
 
+span.checkbox {
+  float: left;
+  width: 20px; 
+}
+
+.logo {
+  margin-right: 2em;
+}
+
 /* divs */
 
 #navigation {
@@ -173,8 +184,8 @@ pre {
   font-size: 11px;
 }
 
-a { color: #000; }
-a:visited { color: #666; }
+a { color: #444; }
+a:visited { color: #444; }
 
 div.field, div.actions {
   margin-bottom: 10px;

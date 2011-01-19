@@ -11,7 +11,14 @@
     (
     = link_to "iCal", conference_ical_path(@conference)
     )
-    
+
+  - if current_user.participation_for(@conference)
+    %br
+    %span.warn You are attending the conference.
+  - if current_user == @conference.creator
+    %br
+    %span.warn You are the organizator.
+
 %h2 Description
 %p= @conference.description
 
@@ -47,15 +54,18 @@
 %h2 Categories
 %p= @conference.categories.map(&:name).join(', ')
 
-- if current_user && current_user.friends.any?
-  %h2 My Friends
+%h2 Invite friends
+- if current_user.friends.any?
   %ul.links
     = form_tag notifications_path do |f|
       = hidden_field_tag :conference_id, @conference.id
       - for friend in current_user.friends
         %li
-          - unless friend.participation_for(@conference) || friend.has_invitation_for(@conference) 
-            = check_box_tag "user[#{friend.id}]", 1
-          = link_to user_info(friend), user_path(participant)
-      = submit_tag "Invite friends to this conference!"
+          %span.checkbox
+            - unless friend.participation_for(@conference) || friend.has_invitation_for(@conference) 
+              = check_box_tag "user[#{friend.id}]", 1
+            - else
+              %span.warn IV
+          = link_to user_info(friend), user_path(friend)
+      = submit_tag "Invite friends to this conference!", :class => 'invite_friends_to_conference'
     

@@ -14,7 +14,7 @@
     = render :partial => 'shared/flash'
   #header
     #navigation
-      = link_to image_tag('cap.png', :alt => 'CaP'), root_path
+      = link_to image_tag('cap.png', :alt => 'CaP', :class => 'logo'), root_path
       %ul.navigation
         - if current_user
           %li= link_to "Search conferences", search_conferences_path, :id => 'search_conferences'
@@ -25,6 +25,10 @@
         - else
           %li= link_to "Sign in", new_user_session_path
           %li= link_to "Sign up", new_user_registration_path, :id => 'sign_up'
+        - if current_user.try(:admin?)
+          %li
+            \|
+            = link_to "Manage categories", admin_categories_path, :id => 'category_admin'
     
   #content
     = yield

@@ -4,7 +4,28 @@
   - else
     Profile of
     = current_user.friends_with?(@user) ? @user.full_name : @user.username
-    
+
+- if current_user == @user
+  %h2 Notifications
+  - if @user.received_notifications.empty?
+    %p.warn No notifications.
+  - else
+    %ul.links
+      - for notification in @user.received_notifications
+        %li
+          = display_notification(notification)
+  %h2 Friendship invitations
+  - if @user.friendship_invitations.empty?
+    %p.warn No friendship invitations.
+  - else
+    %ul.links
+      - for friendship in @user.friendship_invitations
+        %li
+          = button_to 'Confirm!', confirm_friendship_request_path(friendship), :class => 'confirm_friendship'
+          = button_to 'Reject!', reject_friendship_request_path(friendship), :class => 'reject_friendship', :confirm => "You don't want to be friends?" 
+          \-
+          = link_to friendship.user.full_name, friendship.user 
+
 %h2 Details
 %table
   %tr
@@ -29,33 +50,36 @@
   %tr
     %td Longitude:
     %td= @user.lng
-- if current_user == @user    
-  %h2 Friends
-  - if @user.friends.empty?
-    %p.warn
+    
+
+%h2 Friends
+- if @user.friends.empty?
+  %p.warn
+    - if current_user == @user
       Uhh? You have no friends here!
       = link_to 'Make some.', search_users_path
-  - else
-    %ul.links
-      - for friend in @user.friends
-        %li= user_info(friend)
-      
+    - else
+      = user_info(@user)
+      has no Friends.
+- else
+  %ul.links
+    - for friend in @user.friends
+      %li= link_to user_info(friend), friend
+        
+- if current_user == @user      
   %h2 Friendship request
   - if @user.friendship_requests.empty?
     %p.warn No outstanding friendship requests.
   - else
     %ul.links
       - for friend in @user.friendship_requests.map(&:friend)
-        %li= user_info(friend)
+        %li= link_to user_info(friend), friend
+  
+  %h2 Your personal calender
+  %p
+    %span.warn
+      You have not added any conferences to your calender so it's not displayed.
+    %br
+    (Adding conferences to the personal calender is not a MUST in the specification. ;)
       
-  %h2 Friendship invitations
-  - if @user.friendship_invitations.empty?
-    %p.warn No friendship invitations.
-  - else
-    %ul.links
-      - for friendship in @user.friendship_invitations
-        %li
-          = button_to 'Confirm!', confirm_friendship_request_path(friendship), :class => 'confirm_friendship'
-          = button_to 'Reject!', reject_friendship_request_path(friendship), :class => 'reject_friendship', :confirm => "You don't want to be friends?" 
-          \-
-          = friendship.user.full_name
+    

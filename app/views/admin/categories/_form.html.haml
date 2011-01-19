@@ -1,0 +1,20 @@
+= simple_form_for(@category, :url => @category.new_record? ? admin_categories_url : admin_category_url) do |f|
+  - if @category.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@category.errors.count, "error")
+        prohibited this category from being saved:
+
+      %ul
+      - @category.errors.full_messages.each do |msg|
+        %li= msg
+
+  .inputs
+    = f.input :name
+    = f.association :parent
+
+  .actions
+    = f.button :submit
+
+%p
+  = link_to 'Back to categories', admin_categories_path

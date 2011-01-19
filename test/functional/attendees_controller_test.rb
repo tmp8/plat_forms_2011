@@ -41,7 +41,7 @@ class AttendeesControllerTest < ActionController::TestCase
     context "create" do
       
       should "return 204 for successful subscription" do
-        post :create, {:conference_id => @conference.id, :attendee => {:username => @user.username }.to_json, :format => "json"}
+        raw_post :create, {:conference_id => @conference.id, :format => "json"}, {:username => @user.username }.to_json
         assert_response 204
         assert_equal [@user], @conference.participants
         assert_equal "application/json", response.content_type
@@ -49,7 +49,7 @@ class AttendeesControllerTest < ActionController::TestCase
       
       should "return 403 when given user is not equal with current_user" do
         other_user = Factory(:user)
-        post :create, {:conference_id => @conference.id, :attendee => {:username => other_user.username }.to_json, :format => "json"}
+        raw_post :create,  {:conference_id => @conference.id, :format => "json"}, {:username => other_user.username }.to_json
         assert_response 403 
         assert_equal "application/json", response.content_type
       end

@@ -1,0 +1,16 @@
+%h1 Listing categories
+
+%table
+  %tr
+    %th Name
+    %th Parent
+
+  - @categories.each do |admin_category|
+    %tr
+      %td= admin_category.name
+      %td= admin_category.parent.try(:name)
+      %td= button_to 'Edit', edit_admin_category_path(admin_category), :method => :get
+
+%br
+
+= button_to 'Add category', new_admin_category_path, :method => :get
