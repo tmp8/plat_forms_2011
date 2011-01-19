@@ -2,7 +2,7 @@
 
 class CategoriesController < ApplicationController
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:show]
   before_filter :ensure_admin!, :only => [:create]
   
   def index
