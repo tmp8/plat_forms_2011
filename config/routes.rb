@@ -3,15 +3,26 @@ PlatForms2011::Application.routes.draw do
   
   root :to => "welcome#hello"
   
-  resources :users, :only => [:show]
+  resources :users, :only => [:search, :show] do 
+    collection do 
+      get :search
+    end
+  end
+
   resources :conferences do
     collection do 
       get :search
-      post :search
     end
     match "ical" => "conferences#ical"
     resources :conference_participations
   end
+  
+  resources :friendship_requests do
+    collection do
+      post :send_many
+    end
+  end
+  
   resources :categories, :only => [:show]
   
   scope "ws", :as => "ws", :defaults => { :format => 'json' } do

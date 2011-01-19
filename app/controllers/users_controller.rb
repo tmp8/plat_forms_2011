@@ -12,6 +12,23 @@ class UsersController < ApplicationController
     end
   end
   
+  def search
+    @user = User.new(params[:user])
+    @empty_form = params[:user].blank?
+    
+    unless @empty_form
+      @users = User.all.sort_by(&:username)
+        # :term => @conference.name, 
+        # :startdate => @conference.startdate,
+        # :enddate => @conference.enddate,
+        # :categories => @conference.categories,
+        # :include_subcategories => params[:include_subcategories] == "1"
+#      )
+    else
+      @users = []
+    end
+  end
+  
   def update
     if current_user == @user && @user.update_attributes(parse_raw_json)
       render :json => @user.to_json
