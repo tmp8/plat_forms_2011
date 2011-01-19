@@ -1,24 +1,31 @@
 require 'test_helper'
 
 class ConferenceTest < ActiveSupport::TestCase
-  setup do 
+  setup do
     Conference.delete_all
+    update_index
+  end
+  
+  def update_index
+    Conference.index
+    Sunspot.commit
   end
   
   context "search" do
     
     should "find by name" do
       record = Factory(:conference, :name => "is Hamburg beautiful", :description => "some")
-      Conference.index
-      assert_equal [record], Conference.query('Hamburg')
+      update_index
+      
+      assert_equal [record], Conference.query(:term => 'Hamburg')
     end
     
     should "find by description" do
       record = Factory(:conference, :description => "Yes, Hamburg is ever beautiful", :name => "some")
-      Conference.index
-      assert_equal [record], Conference.query('Hamburg')
+      update_index
+      
+      assert_equal [record], Conference.query(:term => 'Hamburg')
     end
-    
     
     context "categories" do 
       
@@ -27,9 +34,9 @@ class ConferenceTest < ActiveSupport::TestCase
       
         root_cat = Factory(:category)
         conference.conference_categories.create(:category => root_cat)
-        Conference.index
+        update_index
       
-        assert_equal [conference], Conference.query(nil, nil, nil, [root_cat])
+        assert_equal [conference], Conference.query(:categories => [root_cat])
       end
       
       should "not find sub_categories" do
@@ -38,21 +45,52 @@ class ConferenceTest < ActiveSupport::TestCase
         root_cat = Factory(:category)
         some_cat = Factory(:category, :parent => root_cat)
         conference.conference_categories.create(:category => some_cat)
-        Conference.index
+        update_index
       
-        assert_equal [conference], Conference.query(nil, nil, nil, root_cat.self_with_ancestors)
+        assert_equal [conference], Conference.query(:categories => [root_cat], :include_subcategories => true)
       end
     end
-
+    
     context "by date" do
       # MUST
-      # should "find when startdate is given" do
-      #   zero = Factory(:conference, :startdate => Date.new(2009,5,22), :enddate => Date.new(2009,5,23))
-      #   one = Factory(:conference, :startdate => Date.new(2010,5,22), :enddate => Date.new(2010,5,23))
-      #   two = Factory(:conference, :startdate => Date.new(2011,5,22), :enddate => Date.new(2011,5,23))
-      #   Conference.index
-      #   assert_equal [one, two], Conference.query(nil, Date.new(2010,5,21))
-      # end
+      should "find when date is given" do
+        c09 = Factory(:conference, :startdate => Date.new(2009,5,22), :enddate => Date.new(2009,6,1))
+        c10 = Factory(:conference, :startdate => Date.new(2010,5,22), :enddate => Date.new(2010,6,1))
+        c11 = Factory(:conference, :startdate => Date.new(2011,5,22), :enddate => Date.new(2011,6,1))
+        update_index
+
+        [Date.new(2000,1,1), Date.new(2009,6,1)].each do |startdate|
+          assert_equal [c09, c10, c11], Conference.query(:startdate => startdate)
+        end
+        
+        [Date.new(2009,6,2), Date.new(2010,6,1)].each do |startdate|
+          assert_equal [c10, c11], Conference.query(:startdate => startdate)
+        end
+        
+        [Date.new(2010,6,2), Date.new(2011,6,1)].each do |startdate|
+          assert_equal [c11], Conference.query(:startdate => startdate)
+        end
+        
+        [Date.new(2011,6,2)].each do |startdate|
+          assert_equal [], Conference.query(:startdate => startdate)
+        end
+
+        [Date.new(2011,6,2)].each do |enddate|
+          assert_equal [c09, c10, c11], Conference.query(:enddate => enddate)
+        end
+
+        [Date.new(2011,5,21)].each do |enddate|
+          assert_equal [c09, c10], Conference.query(:enddate => enddate)
+        end
+
+        [Date.new(2010,5,21)].each do |enddate|
+          assert_equal [c09], Conference.query(:enddate => enddate)
+        end
+
+        [Date.new(2000,5,21)].each do |enddate|
+          assert_equal [], Conference.query(:enddate => enddate)
+        end
+      end
     end
     
     context "by distance" do

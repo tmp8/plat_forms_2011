@@ -1,10 +1,16 @@
 # origin: M
 
+
+class Date
+  def to_i
+    to_s(:db).gsub("-", '').to_i
+  end
+end
+
 # FIXME!
 WebMock.disable_net_connect!(:allow_localhost => true) if defined? WebMock
 
 class Conference < ActiveRecord::Base
-  
   belongs_to :series
   
   belongs_to :creator, :foreign_key => :organizator_id, :class_name => 'User'
@@ -13,8 +19,11 @@ class Conference < ActiveRecord::Base
   has_many :participants, :through => :conference_participations, :source => :user
   has_many :conference_categories, :dependent => :destroy
   has_many :categories, :through => :conference_categories
+  
+  belongs_to :organizator, :class_name => "User"
 
   validates_presence_of :name
+# FIXME startdate < enddate
   validates_presence_of :startdate
   validates_presence_of :enddate
 # FIXME  validates_presence_of :categories
@@ -31,38 +40,73 @@ class Conference < ActiveRecord::Base
     text :name
     text :description     
     integer :category, :multiple => true, :using => :category_ids
+
+    integer :open_on, :multiple => true, :using => :open_on_date_numbers
     
-    date :startdate
-    
-    # date :enddate
     # string :country_code
     
     location :coordinates do
       self
     end
   end
-
+  
+  def open_on_date_numbers
+    (startdate..enddate).to_a.map(&:to_i)
+  end
+  
   def category_ids
     categories.map(&:id)
   end
 
   class << self
-    def query(term = nil, startdate = nil, enddate = nil, categories = nil)
-      q = Conference.search do
+    def query(opts)
+      term = opts.delete(:term)
+      startdate = opts.delete(:startdate)
+      enddate = opts.delete(:enddate)
+      
+      if categories = opts.delete(:categories)
+        if opts.delete(:include_subcategories)
+          categories = categories.map(&:self_with_ancestors).flatten
+        end
+      end
+      
+      solr = Conference.search do
         keywords(term) if term
-
-        with(:category).any_of(categories.map(&:id)) if categories
-        # with(:startdate).greater_than(startdate - 1) if startdate
+        with(:category).any_of(categories.map(&:id)) if categories and categories.any?
+        with(:open_on).greater_than(startdate.to_i) if startdate
+        with(:open_on).less_than(enddate.to_i) if enddate
 
         # with(:coordinates).near(BigDecimal.new('40.7'), BigDecimal.new('-73.5'))
         # with(:enddate).less_equal(enddate) if enddate
         # with(:coordinates).near(a.lat.to_f, a.lng.to_f, :precision => 10) 
       end
-      # p q
-      q.results
+      solr.results
     end
+    
+    def build_from_json(conference_hash, user)
+      categories = conference_hash.delete("categories")
+      conference = new(conference_hash)
+      conference.organizator = user
+      if categories 
+        categories = categories.map do |category|
+          Category.find_by_name(category["name"])
+        end
+        conference.categories << categories
+      end
+      conference
+    end
+    
   end
-
+  
+  def update_from_params(params) 
+    if params[:format] == "json"
+      self.attributes = JSON.parse(params[:conference])
+    else
+      self.attributes = params[:conference]
+    end
+    save!
+  end
+  
   def location=(location)
     write_attribute(:location, location)
     geo_location = GPS.geocode(location)

@@ -1,9 +1,11 @@
 # encoding: utf-8
 
 Factory.define :user do |f|
-  f.username { Faker::Name.name }
+  f.username { Faker::Name.first_name.downcase }
+  f.full_name { Faker::Name.name }
   f.country "Germany"
   f.email { Faker::Internet.email }
+  f.city { Faker::Address.city }
   f.password "123456"
   f.password_confirmation "123456"
 end
@@ -36,3 +38,10 @@ end
 Factory.define :category do |f|
   f.name { Faker::Name.name }
 end
+
+Factory.define :notification do |f|
+  f.association :user
+  f.receiver { Factory(:user) }
+  f.subject { Factory(:conference) }
+end
+

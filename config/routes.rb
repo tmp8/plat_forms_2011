@@ -1,17 +1,40 @@
 PlatForms2011::Application.routes.draw do
   devise_for :users
   
+  root :to => "welcome#hello"
+  
+  resources :users, :only => [:search, :show] do 
+    collection do 
+      get :search
+    end
+  end
+
   resources :conferences do
-    match "ical" => 'conferences#ical'
+    collection do 
+      get :search
+    end
+    match "ical" => "conferences#ical"
     resources :conference_participations
   end
-  
-  root :to => "welcome#hello"
+
+  resource :notifications, :only => [:create, :destroy]
+
+  resources :friendship_requests do
+    collection do
+      post :send_many
+    end
+    member do
+      post 'confirm'
+      post 'reject'
+    end
+  end
   
   resources :categories, :only => [:show]
   
   scope "ws", :as => "ws", :defaults => { :format => 'json' } do
-    resources :conferences, :only => [:create, :show, :update, :index, :destroy]
+    resources :conferences, :only => [:create, :show, :update, :index, :destroy] do
+      resources :attendees, :only => [:index, :create, :destroy]
+    end
     resources :users, :path => "members", :only => [:create, :show, :update] do
       resources :contacts, :only => [:create, :index]
     end

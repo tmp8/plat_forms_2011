@@ -1,4 +1,5 @@
 # encoding: utf-8
+# origin: GM
 
 if ENV['COVERAGE']
   require 'simplecov'
@@ -49,26 +50,21 @@ class ActiveSupport::TestCase
   setup do
     WebmockStubs.google_maps
   end
-  # Add more helper methods to be used by all tests here...
   
   protected
-  
-  def create_activated_user
-    user = Factory.build(:user)
-    user.skip_confirmation!
-    user.save!
-    user
-  end
-  
-  def create_admin_user
-    user = Factory.build(:admin)
-    user.skip_confirmation!
-    user.save!
-    user
-  end
-  
-  # verbatim, from ActiveController's own unit tests
-   def encode_credentials(username, password)
-     "Basic #{ActiveSupport::Base64.encode64("#{username}:#{password}")}"
-   end
+    # verbatim, from ActiveController's own unit tests
+    def encode_credentials(username, password)
+      "Basic #{ActiveSupport::Base64.encode64("#{username}:#{password}")}"
+    end
+   
+    def raw_post(action, params, body)
+      @request.env['RAW_POST_DATA'] = body
+      response = post(action, params)
+      @request.env.delete('RAW_POST_DATA')
+      response
+    end
+
+  	def login_with_basic_auth(user, password = "123456")
+      @request.env['HTTP_AUTHORIZATION'] = encode_credentials(user.username, password)
+  	end
 end

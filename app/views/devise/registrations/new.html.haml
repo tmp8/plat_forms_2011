@@ -1,19 +1,19 @@
 - #origin: GM
-%h2 Sign up!
+%h1 Sign up for CaP!
+%p
 = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-  = devise_error_messages!
   %fieldset
-    %legend Fill in your details
-    = f.input :email
+    %legend Fill in your details:
     = f.input :full_name
-    = country_code_select(:user, :country, [[ 'Germany', 'DE']])
+    = f.input :email
   %fieldset
-    %legend Choose Login and Password
+    %legend Choose Login and Password:
     = f.input :username
     = f.input :password
     = f.input :password_confirmation, :required => true
-  #coordinates
-    = f.input :lat
-    = f.input :lng
+  %fieldset
+    %legend Submit your location:
+    = f.input :city
+    = f.input :country, :priority => ["Germany", "United States", "Island"]
+    = f.input :gps, :hint => ' (e.g. 49.8237N,11.2341E)'
   = f.button :submit
-= render :partial => "devise/shared/links"

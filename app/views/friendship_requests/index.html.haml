@@ -1,0 +1,9 @@
+%ul.links
+  = form_tag send_many_friendship_requests_path do |f|
+    - for user in @users
+      %li
+        - if current_user && (current_user.friend_state(user) == User::NO_CONTACT)
+          = check_box_tag "user[#{user.id}]", 1
+        = link_to "#{user.username} from #{user.city}/#{user.country_code}", user
+    - if current_user
+      = submit_tag "Send friendship Request"

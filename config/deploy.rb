@@ -28,8 +28,9 @@ set :use_sudo, false
 
 namespace :deploy do
 
-  desc "cause Passenger to initiate a restart"
+  desc "cause App to initiate a restart"
   task :restart do
+    run "cd #{current_path}; rake sunspot:reindex RAILS_ENV=production"
     run "touch #{current_path}/tmp/restart.txt" 
   end
 
@@ -38,7 +39,6 @@ namespace :deploy do
   task :seed do
     run "cd #{current_path}; rake db:seed RAILS_ENV=production"
   end
-
 end
 
 after "deploy:update_code", :bundle_install, :symlink_config

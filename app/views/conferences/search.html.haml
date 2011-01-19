@@ -1,0 +1,21 @@
+%h1 Search for a conference
+= simple_form_for(@conference, :url => search_conferences_path, :html => {:method => :get}) do |f|
+  .inputs
+    = f.input :name
+    = f.input :startdate, :include_blank => true
+    = f.input :enddate, :include_blank => true
+    = f.association :categories, :collection => Category.for_select
+    %label With sub-categories
+    = check_box_tag 'include_subcategories', 1, params['include_subcategories']
+
+  .actions
+    = f.submit 'Search'
+%p
+- if !@empty_form
+  %h2 Results
+  - if @conferences.empty?
+    %p.warn No results. Sorry :,(
+  - else
+    %ul.links
+      - for conference in @conferences
+        %li= conference_link(conference)

@@ -8,9 +8,13 @@ module GPS
   def geocode(string)
     {city: nil, country_code: nil}.tap do |result|
       unless string.blank?
-        geo_loc = Geokit::Geocoders::GoogleGeocoder.geocode(CGI::escape(string))
-        result[:city] = geo_loc.city
-        result[:country_code] = geo_loc.country_code
+        begin
+          geo_loc = Geokit::Geocoders::GoogleGeocoder.geocode(CGI::escape(string))
+          result[:city] = geo_loc.city
+          result[:country_code] = geo_loc.country_code
+        rescue Geokit::TooManyQueriesError
+          Rails.logger.warn { "Geokit is over rate limit!" }
+        end
       end
     end
   end

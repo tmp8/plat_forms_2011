@@ -18,7 +18,7 @@
       = f.input :location
 
       = f.input :gps
-      =# f.association :series
+      = f.association :categories, :collection => Category.for_select
       = f.input :venue
       = f.input :accomodation
       = f.input :howtofind
